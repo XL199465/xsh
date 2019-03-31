@@ -18,6 +18,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         List<GrantedAuthority> list = new ArrayList<>();
         list.add(new SimpleGrantedAuthority("ROLE_USER"));
         // 真正需要授权的时候,就说明用户已经可以登录了,所以密码为空
+
         return new User(username, "", list);
     }
 }

@@ -2,8 +2,12 @@ package cn.itcast.core.service;
 
 import cn.itcast.core.dao.user.UserDao;
 import cn.itcast.core.pojo.user.User;
+import cn.itcast.core.pojo.user.UserQuery;
 import cn.ithcast.core.service.UserService;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import entity.PageResult;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import org.springframework.jms.core.MessageCreator;
 
 import javax.jms.*;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -90,5 +95,53 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("验证码有误");
         }
 
+    }
+
+    /**
+     * 分页+条件查询
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param user
+     * @return
+     */
+    @Override
+    public PageResult search(Integer pageNum, Integer pageSize, User user) {
+        // 开启分页
+        PageHelper.startPage(pageNum, pageSize);
+
+        // 创建条件查询对象
+        UserQuery userQuery = new UserQuery();
+        UserQuery.Criteria criteria = userQuery.createCriteria();
+
+        // 添加查询条件
+        if (null != user.getUsername() && !"".equals(user.getUsername())) {
+            criteria.andUsernameLike("%" + user.getUsername() + "%");
+        }
+
+        // 执行方法
+        Page<User> page = (Page<User>) userDao.selectByExample(userQuery);
+
+        // 返回结果
+        return new PageResult(page.getTotal(), page.getResult());
+    }
+
+    /**
+     * 冻结用户
+     *
+     * @param selectIds
+     */
+    @Override
+    public void updateStatus(Long[] selectIds) {
+        User user = new User();
+        user.setStatus("0");
+
+        // 修改状态
+        if (null != selectIds) {
+            for (Long selectId : selectIds) {
+                user.setId(selectId);
+                userDao.updateByPrimaryKeySelective(user);
+            }
+        }
     }
 }
