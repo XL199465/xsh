@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>循环数组1</title>
+    <script src="angular.min.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myController', function ($scope) {
+            $scope.list=[100, 200, 300, 400];
+        })
+    </script>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+<table>
+    <tr ng-repeat="entity in list">
+        <td>{{entity}}</td>
+    </tr>
+</table>
+</body>
+</html>

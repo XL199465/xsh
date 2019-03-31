@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>控制器</title>
+    <script src="angular.min.js"></script>
+    <script>
+        // 创建模块对象
+        // 第一个参数是模块的名字
+        // 第二个参数是数组,如果有多个模块,用来存放其他模块
+        var app = angular.module('myApp', []);
+        // 利用模块创建控制器
+        // $scope:相当于一个大的全局变量 或者说是上下文对象
+        app.controller('myController', function ($scope) {
+            $scope.add = function () {
+                return parseInt($scope.x) + parseInt($scope.y)
+            }
+        })
+
+    </script>
+</head>
+<body ng-app="myApp" ng-controller="myController">
+x:<input ng-model="x"><br>
+y:<input ng-model="y"><br>
+{{add()}};
+</body>
+</html>
