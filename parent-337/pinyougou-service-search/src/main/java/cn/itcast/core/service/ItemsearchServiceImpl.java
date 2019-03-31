@@ -1,5 +1,6 @@
 package cn.itcast.core.service;
 
+import cn.itcast.core.dao.item.ItemDao;
 import cn.itcast.core.pojo.item.Item;
 import cn.itcast.core.pojo.item.ItemCat;
 import cn.ithcast.core.service.ItemsearchService;
@@ -8,11 +9,13 @@ import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.redis.core.BoundValueOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.*;
 import org.springframework.data.solr.core.query.result.*;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Service
@@ -26,6 +29,11 @@ public class ItemsearchServiceImpl implements ItemsearchService {
     // 注入缓存对象RedisTemplate
     @Autowired
     private RedisTemplate redisTemplate;
+
+    //注入itemDao对象
+    @Autowired
+    private ItemDao itemDao;
+
 
     @Override
     public Map<String, Object> search(Map<String, String> searchMap) {
@@ -53,6 +61,19 @@ public class ItemsearchServiceImpl implements ItemsearchService {
         // 返回结果集
         return resultMap;
     }
+
+    @Override
+    public void addToCollect(Integer itemId) {
+        redisTemplate.boundValueOps("itemId").set(itemId);
+    }
+
+    @Override
+    public Item findAll() {
+        Integer itemId = (Integer) redisTemplate.boundValueOps("itemId").get();
+
+        return itemDao.selectByPrimaryKey(Long.valueOf(itemId));
+    }
+
 
     // 从缓存中获取品牌和规格分类
     private Map<String, Object> searchBrandListAndSpecListByCategory(String category) {

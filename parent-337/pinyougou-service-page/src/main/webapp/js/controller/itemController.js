@@ -70,7 +70,6 @@ app.controller("itemController", function ($scope, $http) {
             + $scope.sku.id + '&num=' + $scope.num, {'withCredentials': true}).success(
             function (response) {
                 if (response.flag) {
-                    alert("1");
                     alert(response.message);
                     location.href = 'http://localhost:9103/cart.html';
                 } else {
@@ -79,4 +78,21 @@ app.controller("itemController", function ($scope, $http) {
             }
         );
     }
+
+    //添加商品到收藏
+    $scope.addToCollect=function () {
+        $http.get('http://localhost:9104/user/addToCollect.do?itemId='+$scope.sku.id,{'withCredentials': true}).success(
+            function (response) {
+                if (response.flag){
+                    alert(response.message);
+                    location.href='http://localhost:9104/home-person-collect.html';
+                }else {
+                    alert(response.message);
+                }
+            }
+        )
+
+    }
+
+
 });

@@ -1,13 +1,26 @@
 package cn.itcast.core.controller;
 
 import cn.itcast.core.common.utils.PhoneFormatCheckUtils;
+import cn.itcast.core.pojo.item.Item;
 import cn.itcast.core.pojo.user.User;
+import cn.ithcast.core.service.GoodsService;
+import cn.ithcast.core.service.ItemsearchService;
 import cn.ithcast.core.service.UserService;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.fastjson.JSON;
+import entity.Cart;
+import entity.PageResult;
 import entity.Result;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -17,6 +30,9 @@ public class UserController {
     // 注入UserService对象
     @Reference
     private UserService userService;
+    //注入goodsService对象
+    @Reference
+    private ItemsearchService itemsearchService;
 
     /**
      * 获取验证码
@@ -54,4 +70,34 @@ public class UserController {
             return new Result(false, "注册用户失败");
         }
     }
+
+   /*
+        添加商品到收藏
+    */
+   @RequestMapping("/addToCollect")
+   @CrossOrigin(origins = "http://localhost:9003", allowCredentials = "true")
+    public Result addToCollect(Integer itemId ){
+       try {
+           itemsearchService.addToCollect(itemId);
+           return new Result(true , "添加收藏成功!");
+       } catch (Exception e) {
+           e.printStackTrace();
+           return new Result(false , "添加收藏失败!");
+       }
+   }
+
+   /*
+        查询显示所有
+    */
+    @RequestMapping("/findAll")
+    public List<Item> findAll(){
+        List<Item> itemList = new ArrayList<>();
+        itemList.add(itemsearchService.findAll());
+
+       return itemList;
+
+    }
+
+
+
 }

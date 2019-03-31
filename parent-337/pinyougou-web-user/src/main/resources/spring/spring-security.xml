@@ -15,6 +15,7 @@
     <http pattern="/register.html" security="none"/>
     <http pattern="/user/add.do" security="none"/>
     <http pattern="/user/sendCode.do" security="none"/>
+    <http pattern="../../webapp/home-person-collect.html" security="none"/>
 
     <!--   entry-point-ref  配置CAS入口点引用 -->
     <http use-expressions="false" entry-point-ref="casProcessingFilterEntryPoint">

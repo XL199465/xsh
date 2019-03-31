@@ -1,5 +1,7 @@
 package cn.ithcast.core.service;
 
+import cn.itcast.core.pojo.item.Item;
+
 import java.util.Map;
 
 public interface ItemsearchService {
@@ -9,4 +11,8 @@ public interface ItemsearchService {
      * @return
      */
     Map<String,Object> search(Map<String, String> searchMap);
+
+    void addToCollect(Integer itemId);
+
+    Item findAll();
 }
