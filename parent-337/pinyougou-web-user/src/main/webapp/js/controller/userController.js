@@ -31,6 +31,29 @@ app.controller('userController', function ($scope, $controller, userService) {
                 alert(response.message);
             }
         );
-    }
+    };
+
+
+    // 查询所有加入收藏的商品
+    $scope.findAll = function () {
+        userService.findAll().success(
+            function (response) {
+                $scope.list = response;
+            }
+        )
+    };
+
+
+    // // 分页查询品牌
+    // $scope.findPage = function (page, rows) {
+    //     brandService.findPage(page, rows).success(
+    //         function (response) {
+    //             // 改变数据
+    //             $scope.brandList = response.aaaa;
+    //             // // 改变总条数
+    //             // $scope.paginationConf.totalItems = response.total;
+    //         }
+    //     )
+    // };
 
 });	
