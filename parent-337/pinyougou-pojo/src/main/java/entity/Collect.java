@@ -1,0 +1,54 @@
+package entity;
+
+import cn.itcast.core.pojo.order.OrderItem;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Objects;
+
+public class Collect implements Serializable{
+    // 商家id
+    private String sellerId;
+    // 商家名称
+    private String sellerName;
+    // 购物项
+    private List<OrderItem> orderItemList;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Collect collect = (Collect) o;
+        return Objects.equals(sellerId, collect.sellerId);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(sellerId);
+    }
+
+    public String getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(String sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public String getSellerName() {
+        return sellerName;
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
+    }
+
+    public List<OrderItem> getOrderItemList() {
+        return orderItemList;
+    }
+
+    public void setOrderItemList(List<OrderItem> orderItemList) {
+        this.orderItemList = orderItemList;
+    }
+}
