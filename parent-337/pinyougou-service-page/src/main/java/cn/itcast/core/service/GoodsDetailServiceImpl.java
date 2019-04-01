@@ -93,7 +93,7 @@ public class GoodsDetailServiceImpl implements GoodsDetailService, ServletContex
             out = new OutputStreamWriter(new FileOutputStream(path), "UTF-8");
 
             // 执行
-            template.process(root, out);
+            template.process(root,out);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
