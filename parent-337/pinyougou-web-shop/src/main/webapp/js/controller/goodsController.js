@@ -244,4 +244,19 @@ app.controller('goodsController', function ($scope, $controller, $location, good
             return false;
         }
     }
+
+
+    //查询订单
+    $scope.findAllOrders=function () {
+        goodsService.findAllOrders().success(
+            function (response) {
+                $scope.Orderlist = response;
+            }
+        )
+    }
+
+
+
+
+
 });

@@ -27,9 +27,6 @@ app.controller('goodsPutawayController', function ($scope,$controller,goodsPutaw
                 }
             }
         )
-
-
-
     }
 
 
