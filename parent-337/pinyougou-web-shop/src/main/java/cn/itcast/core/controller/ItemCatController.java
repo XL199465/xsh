@@ -2,9 +2,12 @@ package cn.itcast.core.controller;
 
 
 import cn.itcast.core.pojo.item.ItemCat;
+import cn.itcast.core.pojo.order.Order;
 import cn.ithcast.core.service.ItemCatService;
+import cn.ithcast.core.service.OrderService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import entity.Result;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("itemCat")
+@RequestMapping("/itemCat")
 @SuppressWarnings("all")
 public class ItemCatController {
 
@@ -23,7 +26,7 @@ public class ItemCatController {
     /**
      * 根据父id查询
      */
-    @RequestMapping("findByParentId")
+    @RequestMapping("/findByParentId")
     public List<ItemCat> findByParentId(Long parentId) {
         return itemCatService.findByParentId(parentId);
     }
@@ -78,5 +81,17 @@ public class ItemCatController {
     @RequestMapping("/findAll")
     public List<ItemCat> findAll() {
         return itemCatService.findAll();
+    }
+
+
+    @Reference
+    private OrderService orderService;
+
+    @RequestMapping("/findAllOrders")
+    public List<Order> findAllOrders(){
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        System.out.println(name);
+        return orderService.findAllOrders(name);
     }
 }

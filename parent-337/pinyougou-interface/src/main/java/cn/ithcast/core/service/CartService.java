@@ -2,6 +2,7 @@ package cn.ithcast.core.service;
 
 import cn.itcast.core.pojo.item.Item;
 import entity.Cart;
+import entity.Collect;
 
 import java.util.List;
 
@@ -24,10 +25,22 @@ public interface CartService {
     List<Cart> findCartList(List<Cart> cartList);
 
     /**
+     * 封装数据
+     *
+     * @param collectList
+     */
+    List<Collect> findCollectLists(List<Collect> collectList);
+
+    /**
      * 添加整合后的购物车集合到缓存中
      * @param cookieCartList
      */
     void addCartListToRedis(List<Cart> cookieCartList, String name);
+    /**
+     * 添加整合后的收藏集合到缓存中
+     * @param cookieCollectList
+     */
+    void addCollectListToRedi(List<Collect> cookieCollectList, String name);
 
     /**
      * 从缓存中获取购物车集合
@@ -35,4 +48,11 @@ public interface CartService {
      * @return
      */
     List<Cart> findCartListFromRedis(String name);
+
+    /**
+     * 从缓存中获取收藏集合
+     * @param name
+     * @return
+     */
+    List<Collect> findCollectListFromRedi(String name);
 }

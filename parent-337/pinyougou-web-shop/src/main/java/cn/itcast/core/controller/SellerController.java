@@ -65,10 +65,10 @@ public class SellerController {
         User user2 = (User) context.getAuthentication().getPrincipal();
         String username4 = user2.getUsername();
 
-        System.out.println(username1);
+       /* System.out.println(username1);
         System.out.println(username2);
         System.out.println(username3);
-        System.out.println(username4);
+        System.out.println(username4);*/
 
         map.put("username", username1);
         map.put("curTime", new Date());

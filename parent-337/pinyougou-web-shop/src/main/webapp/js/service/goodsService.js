@@ -15,4 +15,10 @@ app.service('goodsService', function ($http) {
     this.findOne = function (id) {
         return $http.get('../goods/findOne.do?id=' + id);
     }
+
+    //查询全部订单
+    this.findAllOrders = function () {
+        return $http.get('../itemCat/findAllOrders.do');
+
+    }
 });

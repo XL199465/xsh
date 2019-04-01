@@ -8,7 +8,6 @@ import cn.itcast.core.pojo.item.Item;
 import cn.itcast.core.pojo.log.PayLog;
 import cn.itcast.core.pojo.order.Order;
 import cn.itcast.core.pojo.order.OrderItem;
-import cn.itcast.core.pojo.order.OrderItemQuery;
 import cn.ithcast.core.service.CartService;
 import cn.ithcast.core.service.OrderService;
 import com.alibaba.dubbo.config.annotation.Service;
@@ -150,18 +149,5 @@ public class OrderServiceImpl implements OrderService {
 
         // 最后清空购物车
         redisTemplate.boundHashOps("CART").delete(order.getUserId());
-    }
-
-
-    //查询所有订单
-
-    @Override
-    public List<OrderItem> findAllOrders(String username) {
-        /*PayLog payLog = new PayLog();
-        Order currUser = (Order) redisTemplate.boundHashOps("paylog").get(payLog.getUserId());
-        Long orderId = currUser.getOrderId();*/
-
-
-        return orderItemDao.selectByExample(null);
     }
 }
