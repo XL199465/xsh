@@ -14,9 +14,6 @@ public class PageListener implements MessageListener {
     // 注入GoodsDetailService对象
     @Autowired
     private GoodsDetailService goodsDetailService;
-    //注入sorl对象
-    @Autowired
-    private SolrTemplate solrTemplate;
 
     @Override
     public void onMessage(Message message) {
@@ -27,8 +24,6 @@ public class PageListener implements MessageListener {
 
             // 商品详情页面的静态化处理
             goodsDetailService.showGoodsDetail(Long.parseLong(id));
-
-
 
         } catch (JMSException e) {
             e.printStackTrace();

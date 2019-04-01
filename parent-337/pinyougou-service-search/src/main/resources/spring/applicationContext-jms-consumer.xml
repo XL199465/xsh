@@ -37,11 +37,11 @@
         <constructor-arg value="pinyougou_queue_solr_delete"/>
     </bean>
 
-    <!-- 点对点模式, 消息监听容器  删除索引库-->
-    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-        <property name="connectionFactory" ref="connectionFactory"/>
-        <property name="destination" ref="queueSolrDeleteDestination"/>
-        <property name="messageListener" ref="itemDeleteListener"/>
-    </bean>
-    <bean id="itemDeleteListener" class="cn.itcast.core.listener.ItemDeleteListener"></bean>
+    <!--&lt;!&ndash; 点对点模式, 消息监听容器  删除索引库&ndash;&gt;-->
+    <!--<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">-->
+        <!--<property name="connectionFactory" ref="connectionFactory"/>-->
+        <!--<property name="destination" ref="queueSolrDeleteDestination"/>-->
+        <!--<property name="messageListener" ref="itemDeleteListener"/>-->
+    <!--</bean>-->
+    <!--<bean id="itemDeleteListener" class="cn.itcast.core.listener.ItemDeleteListener"></bean>-->
 </beans>

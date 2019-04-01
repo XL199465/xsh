@@ -15,4 +15,9 @@ public interface WeiXinPayService {
      * @return
      */
     Map<String,String> queryPayStatus(String out_trade_no, String name);
+
+    /*
+    * 关闭微信支付的接口
+    * */
+    public void CloseInterface(String out_trade_no);
 }

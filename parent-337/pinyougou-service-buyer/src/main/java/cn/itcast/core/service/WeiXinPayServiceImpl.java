@@ -80,6 +80,7 @@ public class WeiXinPayServiceImpl implements WeiXinPayService {
         }
     }
 
+
     /**
      * 查询支付状态
      *
@@ -125,6 +126,39 @@ public class WeiXinPayServiceImpl implements WeiXinPayService {
         }
     }
 
+    /*
+     * 订单超时 关闭微信支付的接口
+     *
+     * */
+    @Override
+    public void CloseInterface(String out_trade_no) {
+        Map<String, String> close = new HashMap<>();
+        // 公众账号ID	appid  是
+        close.put("appid", appid);
+        // 商户号	mch_id	是
+        close.put("mch_id", partner);
+        // 微信订单号	transaction_id	二选一	String( 11132)	1009660380201506130728806387	微信的订单号，建议优先使用
+        // 商户订单号	out_trade_no	String(32)	20150806125346	商户系统内部订单号，要求32个字符内，只能是数字、大小写字母_-|*@ ，且在同一个商户号下唯一。 详见商户订单号
+        close.put("out_trade_no", out_trade_no);
+        // 随机字符串	nonce_str	是
+        close.put("nonce_str", WXPayUtil.generateNonceStr());
+        try {
+            //查询签名
+            String signedXml = WXPayUtil.generateSignedXml(close, partnerkey);
+            //发送请求                                   https://api.mch.weixin.qq.com/secapi/pay/reverse
+            HttpClient httpClient = new HttpClient("https://api.mch.weixin.qq.com/secapi/pay/reverse");
+            httpClient.setHttps(true);
+            httpClient.setXmlParam(signedXml);
+            // 发送请求
+            httpClient.post();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     /**
      * 更新支付日志的数据
      *
@@ -163,5 +197,7 @@ public class WeiXinPayServiceImpl implements WeiXinPayService {
         redisTemplate.boundHashOps("payLog").delete(name);
 
     }
+
+
 }
 

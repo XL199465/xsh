@@ -82,4 +82,9 @@ public class GoodsController {
             return new Result(false, "修改商品失败");
         }
     }
+    @RequestMapping("/addSeconds")
+    public Result addSeconds(Long[] ids){
+
+           return goodsService.addSeconds(ids);
+    }
 }

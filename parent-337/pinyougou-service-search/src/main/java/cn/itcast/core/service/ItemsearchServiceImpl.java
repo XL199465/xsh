@@ -37,7 +37,7 @@ public class ItemsearchServiceImpl implements ItemsearchService {
 
 
     @Override
-    public Map<String, Object> search(Map<String, String> searchMap) {
+    public Map<String, Object>search(Map<String, String> searchMap) {
 
         // 对传递过来的关键字预处理
         String beforeKeywords = searchMap.get("keywords");
