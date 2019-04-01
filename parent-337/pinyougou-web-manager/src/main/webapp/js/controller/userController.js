@@ -3,6 +3,7 @@ app.controller('userController', function ($scope, $controller, userService) {
     // 继承
     $controller('baseController', {$scope: $scope});
 
+
     // 分页+条件查询
     $scope.searchEntity = {};
     $scope.search = function (pageNum, pageSize) {
@@ -27,6 +28,18 @@ app.controller('userController', function ($scope, $controller, userService) {
                 } else {
                     alert(response.message);
                 }
+            }
+        )
+    };
+
+    // 展示用户活跃度
+    $scope.countActivity = function () {
+        userService.countActivity().success(
+            function (response) {
+                $scope.entity = response;
+                $scope.entity.userTotalCount = response.userTotalCount;
+                $scope.entity.activityUserCount = response.activityUserCount;
+                $scope.entity.unactivityUserCount = response.unactivityUserCount;
             }
         )
     }

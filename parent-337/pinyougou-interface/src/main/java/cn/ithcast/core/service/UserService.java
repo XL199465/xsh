@@ -1,6 +1,7 @@
 package cn.ithcast.core.service;
 
 import cn.itcast.core.pojo.user.User;
+import cn.itcast.core.pojogroup.UserVo;
 import entity.PageResult;
 
 public interface UserService {
@@ -31,4 +32,17 @@ public interface UserService {
      * @param selectIds
      */
     void updateStatus(Long[] selectIds);
+
+    /**
+     * 根据用户名查询用户
+     * @param username
+     * @return
+     */
+    User findByUsername(String username);
+
+    /**
+     * 用户活跃度统计
+     * @return
+     */
+    UserVo countActivity();
 }

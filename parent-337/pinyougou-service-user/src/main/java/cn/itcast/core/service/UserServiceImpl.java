@@ -3,6 +3,7 @@ package cn.itcast.core.service;
 import cn.itcast.core.dao.user.UserDao;
 import cn.itcast.core.pojo.user.User;
 import cn.itcast.core.pojo.user.UserQuery;
+import cn.itcast.core.pojogroup.UserVo;
 import cn.ithcast.core.service.UserService;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
@@ -10,12 +11,17 @@ import com.github.pagehelper.PageHelper;
 import entity.PageResult;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
+import redis.clients.jedis.Jedis;
 
 import javax.jms.*;
+import java.text.SimpleDateFormat;
+import java.util.BitSet;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -144,4 +150,58 @@ public class UserServiceImpl implements UserService {
             }
         }
     }
+
+    /**
+     * 根据用户名查询用户
+     *
+     * @param username
+     * @return
+     */
+    @Override
+    public User findByUsername(String username) {
+        UserQuery userQuery = new UserQuery();
+        UserQuery.Criteria criteria = userQuery.createCriteria();
+
+        criteria.andUsernameEqualTo(username);
+        List<User> userList = userDao.selectByExample(userQuery);
+
+        if (null != userList) {
+            return userList.get(0);
+        }
+        return null;
+    }
+
+    /**
+     * 用户活跃度统计
+     *
+     * @return
+     */
+    @Override
+    public UserVo countActivity() {
+        UserVo userVo = new UserVo();
+
+        // 用户总数
+        Integer userTotalCount = userDao.queryAll();
+        userVo.setUserTotalCount(userTotalCount);
+
+        // 活跃用户 (最近七天至少登录一次为活跃用户)
+        List<User> userList = userDao.selectByExample(null);
+        Integer activityUserCount = 0;
+        for (User user : userList) {
+            if (null != user.getLastLoginTime() && (System.currentTimeMillis() - user.getLastLoginTime().getTime()) < 7 * 24 * 3600 * 1000) {
+                activityUserCount++;
+            }
+        }
+        userVo.setActivityUserCount(activityUserCount);
+
+        // 非活跃用户
+        userVo.setUnactivityUserCount(userTotalCount - activityUserCount);
+
+        System.out.println(userVo.getUserTotalCount()+userVo.getActivityUserCount()+userVo.getUnactivityUserCount());
+
+        // 返回结果
+        return userVo;
+    }
+
+
 }

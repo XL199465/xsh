@@ -28,4 +28,10 @@ public interface UserDao {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    /**
+     * 查询用户总数
+     * @return
+     */
+    Integer queryAll();
 }

@@ -8,5 +8,10 @@ app.service('userService', function ($http) {
     // 冻结
     this.updateStatus = function (selectIds) {
         return $http.get('../user/updateStatus.do?selectIds=' + selectIds);
-    }
+    };
+
+    // 用户活跃度
+    this.countActivity = function () {
+        return $http.get('../user/countActivity.do');
+    };
 });
