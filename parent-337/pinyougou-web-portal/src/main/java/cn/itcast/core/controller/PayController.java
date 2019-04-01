@@ -48,7 +48,6 @@ public class PayController {
         while (true) {
             // 询问微信
             Map<String, String> map = weiXinPayService.queryPayStatus(out_trade_no, name);
-
             // 判断
             if (map == null) {
                 result = new Result(false, "支付失败");
@@ -58,7 +57,6 @@ public class PayController {
                 result = new Result(true, "支付成功");
                 break;
             }
-
             // 然后间隔几秒,再次询问
             try {
                 Thread.sleep(5000);
@@ -67,8 +65,9 @@ public class PayController {
             }
 
             temp++;
-            if (temp >= 5) {
-                result = new Result(false, "二维码超时");
+            if (temp >= 2) {
+                weiXinPayService.CloseInterface(out_trade_no);
+                //result = new Result(false, "二维码超时");
                 break;
             }
         }

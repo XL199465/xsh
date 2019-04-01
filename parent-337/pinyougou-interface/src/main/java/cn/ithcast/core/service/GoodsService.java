@@ -3,6 +3,7 @@ package cn.ithcast.core.service;
 import cn.itcast.core.pojo.good.Goods;
 import cn.itcast.core.pojogroup.GoodsVo;
 import entity.PageResult;
+import entity.Result;
 
 public interface GoodsService {
 
@@ -46,4 +47,7 @@ public interface GoodsService {
      * @param selectIds
      */
     void del(Long[] selectIds);
+
+
+    Result addSeconds(Long[] ids);
 }

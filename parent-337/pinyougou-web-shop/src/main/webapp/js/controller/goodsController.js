@@ -243,5 +243,33 @@ app.controller('goodsController', function ($scope, $controller, $location, good
         } else {
             return false;
         }
+    };
+    //添加到秒杀项目
+    $scope.Add_seconds=function () {
+        goodsService.Add_seconds($scope.selectIds).success(
+            function (response) {
+               if (response.flag){
+                  alert(response.message);
+                  $scope.reloadList();
+               }else {
+                  alert(response.message) ;
+               }
+            }
+        )
     }
+
+
+    //查询订单
+    $scope.findAllOrders=function () {
+        goodsService.findAllOrders().success(
+            function (response) {
+                $scope.Orderlist = response;
+            }
+        )
+    }
+
+
+
+
+
 });

@@ -37,4 +37,15 @@ public class GoodsPutawayController {
         }
 
     }
+    @RequestMapping("/sold_out")
+    public Result sold_out(Long[]selectIds){
+        try {
+            return goodsPutawayService.sole_out(selectIds);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,"后台错误");
+        }
+
+
+    }
 }

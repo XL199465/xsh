@@ -5,7 +5,7 @@
     <!-- 页面meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>商品管理</title>
+    <title>订单管理</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
     <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
@@ -31,11 +31,11 @@
 
 </head>
 
-<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="goodsController">
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="goodsController" ng-init="findAllOrders()">
 <!-- .box-body -->
 
 <div class="box-header with-border">
-    <h3 class="box-title">商品管理</h3>
+    <h3 class="box-title">订单管理</h3>
 </div>
 
 <div class="box-body">
@@ -47,13 +47,9 @@
         <div class="pull-left">
             <div class="form-group form-inline">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default" title="新建"><i class="fa fa-file-o"></i> 新建</button>
-                    <button type="button" class="btn btn-default" title="删除"><i class="fa fa-trash-o"></i> 删除</button>
-                    <button type="button" class="btn btn-default" title="提交审核"><i class="fa fa-check"></i> 提交审核</button>
-                    <button type="button" class="btn btn-default" title="屏蔽" onclick='confirm("你确认要屏蔽吗？")'><i
-                            class="fa fa-ban"></i> 屏蔽
-                    </button>
-                    <button type="button" class="btn btn-default" title="添加秒杀" ng-click="Add_seconds()"><i class="fa fa-check"></i> 添加秒杀</button>
+                    <button type="button" class="btn btn-default" title="删除订单"><i class="fa fa-trash-o"></i> 删除订单</button>
+                    <button type="button" class="btn btn-default" title="订单发货"><i class="fa fa-check"></i> 订单发货</button>
+
                     <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i
                             class="fa fa-refresh"></i> 刷新
                     </button>
@@ -65,13 +61,11 @@
                 状态：
                 <select ng-model="searchEntity.auditStatus">
                     <option value="">全部</option>
-                    <option value="0">未申请</option>
-                    <option value="1">申请中</option>
-                    <option value="2">审核通过</option>
-                    <option value="3">已驳回</option>
+                    <option value="0">已发货</option>
+                    <option value="1">未发货</option>
+                    <option value="2">已付款</option>
+                    <option value="2">未付款</option>
                 </select>
-                商品名称：<input ng-model="searchEntity.goodsName">
-                <button ng-click="reloadList()" class="btn btn-default">查询</button>
             </div>
         </div>
         <!--工具栏/-->
@@ -83,27 +77,27 @@
                 <th class="" style="padding-right:0px">
                     <input id="selall" type="checkbox" class="icheckbox_square-blue">
                 </th>
-                <th class="sorting_asc">商品ID</th>
-                <th class="sorting">商品名称</th>
-                <th class="sorting">商品价格</th>
-                <th class="sorting">一级分类</th>
-                <th class="sorting">二级分类</th>
-                <th class="sorting">三级分类</th>
+                <th class="sorting_asc">订单ID</th>
+                <th class="sorting">付款时间</th>
+                <th class="sorting">收货人手机</th>
+                <th class="sorting">收货地址</th>
+                <th class="sorting">收货人</th>
+                <th class="sorting">实付金额</th>
                 <th class="sorting">状态</th>
                 <th class="text-center">操作</th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="entity in list">
+            <tr ng-repeat="entity in Orderlist">
                 <td><input type="checkbox"></td>
-                <td>{{entity.id}}</td>
-                <td>{{entity.goodsName}}</td>
-                <td>{{entity.price}}</td>
-                <td>{{itemCatList[entity.category1Id]}}</td>
-                <td>{{itemCatList[entity.category2Id]}}</td>
-                <td>{{itemCatList[entity.category3Id]}}</td>
+                <td>{{entity.orderId}}</td>
+                <td>{{entity.updateTime}}</td>
+                <td>{{entity.receiverMobile}}</td>
+                <td>{{entity.receiverAreaName}}</td>
+                <td>{{entity.receiver}}</td>
+                <td>{{entity.payment}}</td>
                 <td>
-                    {{status[entity.auditStatus]}}
+                    {{entity.status}}
                 </td>
 
                 <td class="text-center">
@@ -112,8 +106,8 @@
             </tr>
             </tbody>
         </table>
-        <!--数据列表/-->
-        <tm-pagination conf="paginationConf"></tm-pagination>
+        <!--&lt;!&ndash;数据列表/&ndash;&gt;
+        <tm-pagination conf="paginationConf"></tm-pagination>-->
 
     </div>
     <!-- 数据表格 /-->

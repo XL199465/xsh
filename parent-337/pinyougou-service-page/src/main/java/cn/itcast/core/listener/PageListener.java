@@ -25,8 +25,6 @@ public class PageListener implements MessageListener {
             // 商品详情页面的静态化处理
             goodsDetailService.showGoodsDetail(Long.parseLong(id));
 
-
-
         } catch (JMSException e) {
             e.printStackTrace();
         }

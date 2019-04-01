@@ -22,6 +22,7 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import entity.PageResult;
+import entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.Criteria;
@@ -398,5 +399,22 @@ public class GoodsServiceImpl implements GoodsService {
                 });
             }
         }
+    }
+
+
+    /**
+     * 添加到秒杀
+     * @param ids
+     * @return
+     */
+    @Override
+    public Result addSeconds(Long[] ids) {
+        if (ids.length>0){
+
+
+
+
+        }
+        return new Result(false,"没有选中数据");
     }
 }

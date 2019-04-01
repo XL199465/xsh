@@ -27,12 +27,24 @@ app.controller('goodsPutawayController', function ($scope,$controller,goodsPutaw
                 }
             }
         )
-
-
-
     }
+    //商品下架
+    //分析:
+        //下架需要加判断
+    $scope.sold_out=function () {
+        if (confirm('您确定要下架吗?')){
+        goodsPutawayService.sold_out($scope.selectIds).success(
+            function (response) {
+                if (response.flag){
+                    $scope.reloadList();
+                }else {
+                    alert(response.message);
+                }
 
-
+            }
+        )
+        }
+    }
 
 }
 );
