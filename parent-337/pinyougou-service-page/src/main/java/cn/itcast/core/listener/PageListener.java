@@ -15,8 +15,8 @@ public class PageListener implements MessageListener {
     @Autowired
     private GoodsDetailService goodsDetailService;
     //注入sorl对象
-    @Autowired
-    private SolrTemplate solrTemplate;
+    /*@Autowired
+    private SolrTemplate solrTemplate;*/
 
     @Override
     public void onMessage(Message message) {

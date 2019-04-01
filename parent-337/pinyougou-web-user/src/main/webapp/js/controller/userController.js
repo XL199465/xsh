@@ -43,6 +43,15 @@ app.controller('userController', function ($scope, $controller, userService) {
         )
     };
 
+    // 查询所有订单
+    $scope.findAllOrders = function () {
+        userService.findAllOrders().success(
+            function (response) {
+                $scope.list = response;
+            }
+        )
+    };
+
 
     // // 分页查询品牌
     // $scope.findPage = function (page, rows) {

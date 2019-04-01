@@ -2,15 +2,19 @@ package cn.itcast.core.controller;
 
 import cn.itcast.core.common.utils.PhoneFormatCheckUtils;
 import cn.itcast.core.pojo.item.Item;
+import cn.itcast.core.pojo.order.Order;
+import cn.itcast.core.pojo.order.OrderItem;
 import cn.itcast.core.pojo.user.User;
 import cn.ithcast.core.service.GoodsService;
 import cn.ithcast.core.service.ItemsearchService;
+import cn.ithcast.core.service.OrderService;
 import cn.ithcast.core.service.UserService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
 import entity.Cart;
 import entity.PageResult;
 import entity.Result;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +37,9 @@ public class UserController {
     //注入goodsService对象
     @Reference
     private ItemsearchService itemsearchService;
+    //注入OrderService对象
+    @Reference
+    private OrderService orderService;
 
     /**
      * 获取验证码
@@ -86,6 +93,8 @@ public class UserController {
        }
    }
 
+
+
    /*
         查询显示所有
     */
@@ -98,6 +107,19 @@ public class UserController {
 
     }
 
+
+
+    /*
+         查询显示所有订单
+     */
+    @RequestMapping("/findAllOrders")
+    public List<OrderItem> findAllOrders(){
+        //得到登陆人账号,判断当前是否有人登陆
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+
+        return orderService.findAllOrders(username);
+    }
 
 
 }
