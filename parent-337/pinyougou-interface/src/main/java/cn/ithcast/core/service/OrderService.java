@@ -1,6 +1,7 @@
 package cn.ithcast.core.service;
 
 import cn.itcast.core.pojo.order.Order;
+import cn.itcast.core.pojogroup.Orderpp;
 
 import java.util.List;
 
@@ -12,5 +13,6 @@ public interface OrderService {
      */
     void add(Order order);
 
-    List<Order> findAllOrders(String name);
+    //查询我的订单
+    List<Orderpp> findAllOrders(String name);
 }
