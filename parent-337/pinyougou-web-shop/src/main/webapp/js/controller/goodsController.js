@@ -256,7 +256,7 @@ app.controller('goodsController', function ($scope, $controller, $location, good
                }
             }
         )
-    }
+    };
 
 
     //查询订单
