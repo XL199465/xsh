@@ -2,8 +2,6 @@ package cn.ithcast.core.service;
 
 import cn.itcast.core.pojo.order.Order;
 
-import java.util.List;
-
 public interface OrderService {
 
     /**
@@ -11,6 +9,4 @@ public interface OrderService {
      * @param order
      */
     void add(Order order);
-
-    List<Order> findAllOrders(String name);
 }
