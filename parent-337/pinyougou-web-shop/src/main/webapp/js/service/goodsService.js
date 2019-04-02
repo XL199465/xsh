@@ -15,16 +15,16 @@ app.service('goodsService', function ($http) {
     this.findOne = function (id) {
         return $http.get('../goods/findOne.do?id=' + id);
     }
-<<<<<<< Updated upstream
+
 
     //查询全部订单
     this.findAllOrders = function () {
         return $http.get('../itemCat/findAllOrders.do');
 
-=======
-    //添加到秒杀表
-    this.Add_seconds=function (ids) {
-        return $http.post('../goods/addSeconds?ids='+ids);
->>>>>>> Stashed changes
     }
+        //添加到秒杀表
+    this.Add_seconds = function (ids) {
+        return $http.post('../goods/addSeconds?ids=' + ids);
+    }
+
 });
