@@ -53,7 +53,9 @@
                     <button type="button" class="btn btn-default" title="屏蔽" onclick='confirm("你确认要屏蔽吗？")'><i
                             class="fa fa-ban"></i> 屏蔽
                     </button>
-                    <button type="button" class="btn btn-default" title="添加秒杀" ng-click="Add_seconds()"><i class="fa fa-check"></i> 添加秒杀</button>
+                    <button ng-click="entity = {}" type="button" class="btn btn-default" title="添加秒杀" data-toggle="modal"
+                            data-target="#editModal"><i class="fa fa-file-o"></i> 添加秒杀
+                    </button>
                     <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i
                             class="fa fa-refresh"></i> 刷新
                     </button>
@@ -95,7 +97,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="entity in list">
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox" ng-click="updateSelection($event, entity.id)"></td>
                 <td>{{entity.id}}</td>
                 <td>{{entity.goodsName}}</td>
                 <td>{{entity.price}}</td>
@@ -121,7 +123,38 @@
 
 </div>
 <!-- /.box-body -->
-
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">秒杀设置</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-striped" width="800px">
+                    <tr>
+                        <td>秒杀价格</td>
+                        <!--将输入框的值和entity对象的属性进行绑定-->
+                        <td><input ng-model="entity.costPrice" class="form-control" placeholder="秒杀优惠"></td>
+                    </tr>
+                    <tr>
+                        <td>开始时间</td>
+                        <td><input type="datetime-local"id="startTime" value="2019-04-02T13:59:59"/></td>
+                    </tr>
+                    <tr>
+                        <td>结束时间</td>
+                        <td><input type="datetime-local" id="endTime" value="2015-09-24T13:59:59"/></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <!--绑定点击事件-->
+                <button ng-click="Add_seconds()" class="btn btn-success" data-dismiss="modal" aria-hidden="true">保存</button>
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>

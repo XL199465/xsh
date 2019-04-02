@@ -12,4 +12,5 @@ public interface OrderService {
      */
     void add(Order order);
 
+    List<Order> findAllOrders(String name);
 }

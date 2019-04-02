@@ -5,11 +5,9 @@ import cn.itcast.core.pojo.good.Brand;
 import cn.itcast.core.pojo.good.BrandQuery;
 import cn.ithcast.core.service.BrandService;
 import com.alibaba.dubbo.config.annotation.Service;
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import entity.PageResult;
-import entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
