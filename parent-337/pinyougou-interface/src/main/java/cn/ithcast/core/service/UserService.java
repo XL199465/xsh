@@ -45,4 +45,11 @@ public interface UserService {
      * @return
      */
     UserVo countActivity();
+
+    /**
+     * 根据用户id查询用户
+     * @param id
+     * @return
+     */
+    User findById(Long id);
 }

@@ -197,11 +197,21 @@ public class UserServiceImpl implements UserService {
         // 非活跃用户
         userVo.setUnactivityUserCount(userTotalCount - activityUserCount);
 
-        System.out.println(userVo.getUserTotalCount()+userVo.getActivityUserCount()+userVo.getUnactivityUserCount());
+        System.out.println(userVo.getUserTotalCount() + userVo.getActivityUserCount() + userVo.getUnactivityUserCount());
 
         // 返回结果
         return userVo;
     }
 
-
+    /**
+     * 根据用户id查询用户
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public User findById(Long id) {
+        User user = userDao.selectByPrimaryKey(id);
+        return user;
+    }
 }

@@ -94,4 +94,14 @@ public class SellerServiceImpl implements SellerService {
         seller.setStatus(status);
         sellerDao.updateByPrimaryKeySelective(seller);
     }
+
+    /**
+     * 查询所有商家
+     *
+     * @return
+     */
+    @Override
+    public List<Seller> findAll() {
+        return sellerDao.selectByExample(null);
+    }
 }

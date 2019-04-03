@@ -102,6 +102,4 @@ public class UserController {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         return orderService.findAllOrders(name);
     }
-
-
 }
