@@ -194,7 +194,7 @@ $(function(){
                             <a data-toggle="modal" data-target=".edit" data-keyboard="false"   class="sui-btn  btn-info add-new">添加新地址</a>
                             <span class="clearfix"></span>
                         </div>
-                        <div class="address-detail">
+                        <div class="address-detail" ng-repeat="address in addressList">
                             <table class="sui-table table-bordered">
                                 <thead>
                                     <tr>
@@ -207,24 +207,15 @@ $(function(){
                                 <tbody>
                                     <tr>
                                         <td>刘田田</td>
-                                        <td>北京 北京市 海淀区 上地街道东北旺西路8号中关村软件园9号楼</td>
-                                        <td>1774***********4</td>
+                                        <td>{{address.address}}</td>
+                                        <td>{{address.mobile}}</td>
                                         <td>
                                             <a href="#">编辑</a>
                                             <a href="#">删除</a>
                                             默认地址
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>沈沉</td>
-                                        <td>北京 北京市 海淀区 上地街道东北旺西路8号中关村软件园9号楼</td>
-                                        <td>1774***********4</td>
-                                        <td>
-                                            <a href="#">编辑</a>
-                                            <a href="#">删除</a>
-                                            <a href="#">设为默认</a>
-                                        </td>
-                                    </tr>
+
                                     
                                 </tbody>
                             </table>                          
