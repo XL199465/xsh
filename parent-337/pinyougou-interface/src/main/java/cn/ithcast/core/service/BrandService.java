@@ -2,7 +2,10 @@ package cn.ithcast.core.service;
 
 import cn.itcast.core.pojo.good.Brand;
 import entity.PageResult;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -62,4 +65,15 @@ public interface BrandService {
      * 查询id和name,存入一个map集合 并将多个这样的集合存入list集合中
      */
     List<Map> selectOptionList();
+
+
+    /**
+     * 品牌Excel录入数据库
+     *
+     * @param
+     * @return
+     */
+    String ajaxUploadExcel(byte[] bytes);
+
+    String test(int a);
 }

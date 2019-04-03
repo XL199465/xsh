@@ -170,6 +170,7 @@ app.controller('goodsController', function ($scope, $controller, $location, good
 
     // 分页+条件查询
     // 必须初始化searchEntity对象
+
     $scope.searchEntity = {};
     $scope.search = function (pageNum, pageSize) {
         goodsService.search(pageNum, pageSize, $scope.searchEntity).success(

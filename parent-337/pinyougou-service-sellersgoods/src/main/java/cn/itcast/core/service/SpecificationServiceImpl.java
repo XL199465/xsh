@@ -1,5 +1,6 @@
 package cn.itcast.core.service;
 
+import cn.itcast.core.common.utils.ExcelUtil;
 import cn.itcast.core.dao.specification.SpecificationDao;
 import cn.itcast.core.dao.specification.SpecificationOptionDao;
 import cn.itcast.core.pojo.specification.Specification;
@@ -13,7 +14,10 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import entity.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -161,5 +165,76 @@ public class SpecificationServiceImpl implements SpecificationService {
     @Override
     public List<Map> selectOptionList() {
         return specificationDao.selectOptionList();
+    }
+
+    /**
+     * Excel表格数据导入数据库
+     *
+     * @param bytes
+     * @return
+     */
+    @Override
+    public String ajaxUploadExcel(byte[] bytes) {
+        System.out.println("得到数据文件");
+
+        // 判断文件是否为空
+        if (null == bytes) {
+            try {
+                throw new Exception("文件不存在！");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        // 获取文件输入流
+        System.out.println("加载流");
+        InputStream inputStream = null;
+        try {
+            inputStream = new ByteArrayInputStream(bytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // 封装出list集合数据
+        System.out.println("封装list集合数据");
+        List<List<Object>> list = null;
+        try {
+            list = new ExcelUtil().getBankListByExcel(inputStream, "jjj");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // 调用service相应方法进行数据保存到数据库中
+        Specification specification = new Specification();
+        for (int i = 0; i < list.size(); i++) {
+            List<Object> lo = list.get(i);
+            System.out.println("遍历" + list.get(i));
+
+            // 定义一个临时的Specification对象
+            Specification temp = null;
+            try {
+                temp = specificationDao.selectByPrimaryKey(Long.valueOf(String.valueOf(lo.get(0))));
+            } catch (Exception e) {
+                System.out.println("没有新增");
+            }
+
+            // 封装Specification对象
+            specification.setId(Long.valueOf(String.valueOf(lo.get(0))));
+            specification.setSpecName(String.valueOf(lo.get(1)));
+            specification.setAuditstatus(String.valueOf(lo.get(2)));
+
+            // 判断temp对象是否为空,为空,则新增,不为空,则修改
+            if (null == temp) {
+                // 新增
+                System.out.println("新增了数据");
+                specificationDao.insertSelective(specification);
+            } else {
+                // 修改
+                System.out.println("修改了数据");
+                specificationDao.updateByPrimaryKeySelective(specification);
+            }
+
+        }
+        return "success";
     }
 }
