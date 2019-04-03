@@ -1,6 +1,7 @@
 package cn.itcast.core.controller;
 
 import cn.itcast.core.pojo.good.Goods;
+import cn.itcast.core.pojo.seckill.SeckillGoods;
 import cn.itcast.core.pojogroup.GoodsVo;
 import cn.ithcast.core.service.GoodsService;
 import com.alibaba.dubbo.config.annotation.Reference;
@@ -82,9 +83,15 @@ public class GoodsController {
             return new Result(false, "修改商品失败");
         }
     }
-    @RequestMapping("/addSeconds")
-    public Result addSeconds(Long[] ids){
 
-           return goodsService.addSeconds(ids);
+    /**
+     * 添加秒杀
+     * @param ids
+     * @return
+     */
+    @RequestMapping("/addSeconds")
+    public Result addSeconds(Long[] ids, @RequestBody SeckillGoods seckillGoods){
+
+           return goodsService.addSeconds(ids,seckillGoods);
     }
 }

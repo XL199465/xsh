@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Excel表格导入数据库</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <!--引入js文件-->
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+    <script type="text/javascript" src="../js/base.js"></script>
+    <script type="text/javascript" src="../js/service/userService.js"></script>
+    <script type="text/javascript" src="../js/controller/basecontroller.js"></script>
+    <script type="text/javascript" src="../js/controller/userController.js"></script>
+</head>
+
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="userController"
+      ng-init="countActivity()">
+<!-- .box-body -->
+<div class="box-header with-border">
+    <h3 class="box-title">Excel表格导入数据库</h3>
+</div>
+
+<div class="box-body">
+
+    <!-- 数据表格 -->
+    <div class="table-box">
+
+        <!--工具栏-->
+        <!--<div class="pull-left">
+            <div class="form-group form-inline">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" title="新建" data-toggle="modal"
+                            data-target="#editModal"><i class="fa fa-file-o"></i> 新建
+                    </button>
+                    <button ng-click="updateStatus()" type="button" class="btn btn-default" title="冻结"><i
+                            class="fa fa-trash-o"></i> 冻结
+                    </button>
+                    <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i
+                            class="fa fa-refresh"></i> 刷新
+                    </button>
+                </div>
+            </div>
+        </div>-->
+        <!--工具栏/-->
+
+        <!--数据列表-->
+        <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+            <thead>
+            <tr>
+                <th class="sorting_asc">品牌导入</th>
+                <th class="sorting">规格导入</th>
+                <th class="sorting">模板导入</th>
+                <th class="sorting">分类导入</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <form action="/brand/ajaxUpload.do" method="post" enctype="multipart/form-data">
+                        请选择Excel：<input type="file" name="file">
+                        <input type="submit" name="提交">
+                    </form>
+                </td>
+                <td>
+                    <form action="/specification/ajaxUpload.do" method="post" enctype="multipart/form-data">
+                    请选择Excel：<input type="file" name="file">
+                    <input type="submit" name="提交">
+                    </form></td>
+                <td>
+                    <form action="/typeTemplate/ajaxUpload.do" method="post" enctype="multipart/form-data">
+                        请选择Excel：<input type="file" name="file">
+                        <input type="submit" name="提交">
+                    </form>
+                </td>
+                <td>
+                    <form action="/itemCat/ajaxUpload.do" method="post" enctype="multipart/form-data">
+                        请选择Excel：<input type="file" name="file">
+                        <input type="submit" name="提交">
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!--数据列表/-->
+    </div>
+    <!-- 数据表格 /-->
+</div>
+</body>
+</html>

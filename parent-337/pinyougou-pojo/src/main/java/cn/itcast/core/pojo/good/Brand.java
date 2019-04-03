@@ -5,15 +5,17 @@ import java.io.Serializable;
 public class Brand implements Serializable {
     private Long id;
 
-    /**
-     * 品牌名称
-     */
     private String name;
 
     /**
      * 品牌首字母
      */
     private String firstChar;
+
+    /**
+     * 品牌审核状态
+     */
+    private String auditstatus;
 
     private static final long serialVersionUID = 1L;
 
@@ -41,6 +43,14 @@ public class Brand implements Serializable {
         this.firstChar = firstChar == null ? null : firstChar.trim();
     }
 
+    public String getAuditstatus() {
+        return auditstatus;
+    }
+
+    public void setAuditstatus(String auditstatus) {
+        this.auditstatus = auditstatus == null ? null : auditstatus.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -50,6 +60,7 @@ public class Brand implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
         sb.append(", firstChar=").append(firstChar);
+        sb.append(", auditstatus=").append(auditstatus);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -69,7 +80,8 @@ public class Brand implements Serializable {
         Brand other = (Brand) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getFirstChar() == null ? other.getFirstChar() == null : this.getFirstChar().equals(other.getFirstChar()));
+            && (this.getFirstChar() == null ? other.getFirstChar() == null : this.getFirstChar().equals(other.getFirstChar()))
+            && (this.getAuditstatus() == null ? other.getAuditstatus() == null : this.getAuditstatus().equals(other.getAuditstatus()));
     }
 
     @Override
@@ -79,6 +91,7 @@ public class Brand implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         result = prime * result + ((getFirstChar() == null) ? 0 : getFirstChar().hashCode());
+        result = prime * result + ((getAuditstatus() == null) ? 0 : getAuditstatus().hashCode());
         return result;
     }
 }

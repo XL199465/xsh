@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="cn.itcast.core.pojo.specification.Specification" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="spec_name" property="specName" jdbcType="VARCHAR" />
+    <result column="auditStatus" property="auditstatus" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,7 +66,7 @@
   </sql>
   <sql id="Base_Column_List" >
     <if test="fields == null" >
-      id, spec_name
+      id, spec_name, auditStatus
     </if>
     <if test="fields != null" >
       ${fields}
@@ -87,7 +88,7 @@
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
-    id,spec_name
+    id,spec_name,auditStatus
     from tb_specification
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -102,18 +103,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.itcast.core.pojo.specification.Specification" >
---     添加主键回显功能
-    <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
-        SELECT LAST_INSERT_ID() AS id
-    </selectKey>
-    insert into tb_specification (id, spec_name)
-    values (#{id,jdbcType=BIGINT}, #{specName,jdbcType=VARCHAR})
+    insert into tb_specification (id, spec_name, auditStatus
+      )
+    values (#{id,jdbcType=BIGINT}, #{specName,jdbcType=VARCHAR}, #{auditstatus,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.itcast.core.pojo.specification.Specification" >
-    --     添加主键回显功能
-    <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
-      SELECT LAST_INSERT_ID() AS id
-    </selectKey>
     insert into tb_specification
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -122,6 +117,9 @@
       <if test="specName != null" >
         spec_name,
       </if>
+      <if test="auditstatus != null" >
+        auditStatus,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -129,6 +127,9 @@
       </if>
       <if test="specName != null" >
         #{specName,jdbcType=VARCHAR},
+      </if>
+      <if test="auditstatus != null" >
+        #{auditstatus,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -147,6 +148,9 @@
       <if test="record.specName != null" >
         spec_name = #{record.specName,jdbcType=VARCHAR},
       </if>
+      <if test="record.auditstatus != null" >
+        auditStatus = #{record.auditstatus,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -155,7 +159,8 @@
   <update id="updateByExample" parameterType="map" >
     update tb_specification
     set id = #{record.id,jdbcType=BIGINT},
-      spec_name = #{record.specName,jdbcType=VARCHAR}
+      spec_name = #{record.specName,jdbcType=VARCHAR},
+      auditStatus = #{record.auditstatus,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -166,12 +171,16 @@
       <if test="specName != null" >
         spec_name = #{specName,jdbcType=VARCHAR},
       </if>
+      <if test="auditstatus != null" >
+        auditStatus = #{auditstatus,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.itcast.core.pojo.specification.Specification" >
     update tb_specification
-    set spec_name = #{specName,jdbcType=VARCHAR}
+    set spec_name = #{specName,jdbcType=VARCHAR},
+      auditStatus = #{auditstatus,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 

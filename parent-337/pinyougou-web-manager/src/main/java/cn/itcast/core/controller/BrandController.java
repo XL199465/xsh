@@ -8,6 +8,7 @@ import entity.Result;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -103,5 +104,14 @@ public class BrandController {
     @RequestMapping("/selectOptionList")
     public List<Map> selectOptionList() {
         return brandService.selectOptionList();
+    }
+
+    /**
+     * 品牌Excel表导入数据库
+     */
+    @RequestMapping("/ajaxUpload")
+    public String ajaxUploadExcel(MultipartFile file) throws Exception {
+        byte[] bytes = file.getBytes();
+        return brandService.ajaxUploadExcel(bytes);
     }
 }

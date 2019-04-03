@@ -165,7 +165,7 @@ public class UserServiceImpl implements UserService {
         criteria.andUsernameEqualTo(username);
         List<User> userList = userDao.selectByExample(userQuery);
 
-        if (null != userList) {
+        if (null != userList && userList.size() > 0) {
             return userList.get(0);
         }
         return null;

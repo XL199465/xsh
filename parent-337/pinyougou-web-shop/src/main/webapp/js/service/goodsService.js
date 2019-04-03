@@ -23,8 +23,8 @@ app.service('goodsService', function ($http) {
 
     }
         //添加到秒杀表
-    this.Add_seconds = function (ids) {
-        return $http.post('../goods/addSeconds?ids=' + ids);
+    this.Add_seconds = function (ids,seckillGoods) {
+        return $http.post('../goods/addSeconds.do?ids=' + ids,seckillGoods);
     }
 
 });
