@@ -268,6 +268,19 @@ app.controller('goodsController', function ($scope, $controller, $location, good
         )
     }
 
+    //订单发货
+    $scope.ordersShipment=function () {
+        goodsService.ordersShipment($scope.selectIds).success(
+            function (response) {
+                if (response.flag){
+                    alert(response.message);
+                }else {
+                    alert(response.message);
+                }
+
+            }
+        )
+    }
 
 
 

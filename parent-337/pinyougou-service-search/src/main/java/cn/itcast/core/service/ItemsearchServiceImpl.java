@@ -7,6 +7,7 @@ import cn.ithcast.core.service.ItemsearchService;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -65,21 +66,15 @@ public class ItemsearchServiceImpl implements ItemsearchService {
 
     @Override
     public void addToCollect(Integer itemId) {
-        if (!redisTemplate.boundValueOps("itemId").get().equals(itemId)){
-            redisTemplate.boundValueOps("itemId").set(itemId);
-        }else {
-            redisTemplate.boundValueOps("itemId").set(null);
-        }
+        redisTemplate.boundValueOps("itemId").set(itemId);
     }
 
     @Override
     public Item findAll() {
-        List<Integer> itemIdList=new ArrayList<>();
-        itemIdList.add((Integer) redisTemplate.boundValueOps("itemId").get());
-        for (Integer integer : itemIdList) {
-            return itemDao.selectByPrimaryKey(Long.valueOf(integer));
-        }
-        return null;
+        Integer itemId = (Integer) redisTemplate.boundValueOps("itemId").get();
+        return itemDao.selectByPrimaryKey(Long.valueOf(itemId));
+
+
     }
 
 

@@ -23,6 +23,8 @@ app.controller("baseController", function ($scope) {
         if ($event.target.checked) {
             // 向数组中添加元素
             $scope.selectIds.push(id);
+
+            console.log($scope.selectIds)
         } else {
             // 从数组中移除
             var idx = $scope.selectIds.indexOf(id);

@@ -84,6 +84,7 @@ public class ItemCatController {
     }
 
 
+    //显示全部订单
     @Reference
     private OrderService orderService;
 
@@ -93,5 +94,17 @@ public class ItemCatController {
 
         System.out.println(name);
         return orderService.findAllOrders(name);
+    }
+
+    //订单发货
+    @RequestMapping("/ordersShipment")
+    public Result ordersShipment(String[] ids){
+        try {
+            orderService.ordersShipment(ids);
+            return new Result(true,"发货成功!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,"发货失败!");
+        }
     }
 }

@@ -152,11 +152,23 @@ public class OrderServiceImpl implements OrderService {
         redisTemplate.boundHashOps("CART").delete(order.getUserId());
     }
 
+    //查询所有订单
     @Override
     public List<Order> findAllOrders(String name) {
         OrderQuery orderQuery = new OrderQuery();
         orderQuery.createCriteria().andSellerIdEqualTo(name);
 
         return orderDao.selectByExample(orderQuery);
+    }
+
+    //订单发货
+    @Override
+    public void ordersShipment(String[] ids) {
+        Order order = new Order();
+        order.setStatus("2");
+        for (String id : ids) {
+            order.setOrderId(Long.valueOf(id));
+            orderDao.updateByPrimaryKeySelective(order);
+        }
     }
 }

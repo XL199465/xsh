@@ -27,4 +27,9 @@ app.service('goodsService', function ($http) {
         return $http.post('../goods/addSeconds?ids=' + ids);
     }
 
+    //订单发货
+    this.ordersShipment = function (ids) {
+        return $http.post('../itemCat/ordersShipment.do?ids='+ids);
+    }
+
 });
