@@ -4,28 +4,27 @@ import cn.itcast.core.pojo.seckill.SeckillOrder;
 import cn.ithcast.core.service.SeckillService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import entity.PageResult;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 运营商秒杀
+ */
 @RestController
-@RequestMapping("/seckill")
-public class SeckillController {
+@RequestMapping("/goodsOrderSeckill")
+public class GoodsOrderSeckillController {
     @Reference
     private SeckillService seckillService;
 
-    @RequestMapping("/search")
-    public PageResult search(Integer pageNum,Integer pageSize,String status){
-        return seckillService.search(pageNum,pageSize,status);
-
-
-    }
+    //运营商查询秒杀订单
     @RequestMapping("/orderSearch")
     public PageResult orderSearch(Integer pageNum, Integer pageSize, @RequestBody SeckillOrder seckillOrder){
-        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        return seckillService.operatororderSearch(pageNum,pageSize,seckillOrder);
 
-        return seckillService.orderSearch(pageNum,pageSize,seckillOrder,name);
+
+
+
+
     }
-
 }

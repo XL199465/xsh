@@ -21,7 +21,7 @@ public class GoodsPutawayController {
     public PageResult search(Integer pageNum,Integer pageSize,@RequestBody Goods goods){
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        return  goodsPutawayService.search(pageNum,pageSize,goods,name);
+        return goodsPutawayService.search(pageNum,pageSize,goods,name);
 
     }
 

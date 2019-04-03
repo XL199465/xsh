@@ -35,19 +35,21 @@ public class GoodsPutawayServiceImpl implements GoodsPutawayService {
     public PageResult search(Integer pageNum, Integer pageSize, Goods goods, String name) {
         PageHelper.startPage(pageNum, pageSize);
         GoodsQuery goodsQuery = new GoodsQuery();
-        goodsQuery.createCriteria().andSellerIdEqualTo(name).andAuditStatusEqualTo("1");
+        GoodsQuery.Criteria criteria = goodsQuery.createCriteria();
+        criteria.andSellerIdEqualTo(name).andAuditStatusEqualTo("1");
         String zt = goods.getAuditStatus();
-        Page<Goods> good = null;
+        System.out.println(zt);
+
         if (zt.equals("0")) {
-            good = (Page<Goods>) goodsDao.selectByExample(goodsQuery);
+            Page<Goods>  good = (Page<Goods>) goodsDao.selectByExample(goodsQuery);
             return new PageResult(good.getTotal(), good.getResult());
         } else if (zt.equals("1")) {
-            goodsQuery.createCriteria().andIsMarketableEqualTo("1");
-            good = (Page<Goods>) goodsDao.selectByExample(goodsQuery);
+            criteria.andIsMarketableEqualTo(zt);
+            Page<Goods> good = (Page<Goods>) goodsDao.selectByExample(goodsQuery);
             return new PageResult(good.getTotal(), good.getResult());
         } else {
-            goodsQuery.createCriteria().andIsMarketableEqualTo("2");
-            good = (Page<Goods>) goodsDao.selectByExample(goodsQuery);
+            criteria.andIsMarketableEqualTo(zt);
+            Page<Goods> good = (Page<Goods>) goodsDao.selectByExample(goodsQuery);
             return new PageResult(good.getTotal(), good.getResult());
         }
     }
