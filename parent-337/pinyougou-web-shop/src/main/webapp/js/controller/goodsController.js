@@ -273,8 +273,8 @@ app.controller('goodsController', function ($scope, $controller, $location, good
 
 
     //查询订单
-    $scope.findAllOrders=function () {
-        goodsService.findAllOrders().success(
+    $scope.findAllOrder=function () {
+        goodsService.findAllOrder().success(
             function (response) {
                 $scope.Orderlist = response;
             }

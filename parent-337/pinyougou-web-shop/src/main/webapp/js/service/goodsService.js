@@ -18,8 +18,8 @@ app.service('goodsService', function ($http) {
 
 
     //查询全部订单
-    this.findAllOrders = function () {
-        return $http.get('../itemCat/findAllOrders.do');
+    this.findAllOrder = function () {
+        return $http.get('../itemCat/findAllOrder.do');
 
     }
         //添加到秒杀表

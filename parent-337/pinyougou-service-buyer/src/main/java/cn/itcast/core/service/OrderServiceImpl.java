@@ -10,6 +10,7 @@ import cn.itcast.core.pojo.log.PayLogQuery;
 import cn.itcast.core.pojo.order.Order;
 import cn.itcast.core.pojo.order.OrderItem;
 import cn.itcast.core.pojo.order.OrderItemQuery;
+import cn.itcast.core.pojo.order.OrderQuery;
 import cn.ithcast.core.service.CartService;
 import cn.ithcast.core.service.OrderService;
 import com.alibaba.dubbo.config.annotation.Service;
@@ -191,7 +192,13 @@ public class OrderServiceImpl implements OrderService {
         }
         return orderppList;
     }
-        /* OrderQuery orderQuery = new OrderQuery();
-           orderQuery.createCriteria().andSellerIdEqualTo(name);
-           return orderDao.selectByExample(orderQuery);*/
+
+    //商家后台查询订单
+    @Override
+    public List<Order> findAllOrder(String name) {
+        OrderQuery orderQuery = new OrderQuery();
+        orderQuery.createCriteria().andSellerIdEqualTo(name);
+        return orderDao.selectByExample(orderQuery);
+    }
+
 }
