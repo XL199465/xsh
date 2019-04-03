@@ -87,11 +87,11 @@ public class ItemCatController {
     @Reference
     private OrderService orderService;
 
-   /* @RequestMapping("/findAllOrders")
-    public List<Order> findAllOrders(){
+    @RequestMapping("/findAllOrder")
+    public List<Order> findAllOrder(){
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
 
         System.out.println(name);
-        return orderService.findAllOrders(name);
-    }*/
+        return orderService.findAllOrder(name);
+    }
 }

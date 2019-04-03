@@ -168,7 +168,6 @@ public class OrderServiceImpl implements OrderService {
         for (PayLog payLog : logList) {
             String orderList = payLog.getOrderList();
             String[] orderList_Order_Id = orderList.split(",");
-
             //根据订单号查询order表
             for (String s : orderList_Order_Id) {
                 Orderpp orderpp = new Orderpp();
@@ -176,7 +175,6 @@ public class OrderServiceImpl implements OrderService {
 
                 order = orderDao.selectByPrimaryKey(Long.parseLong(s.trim()));
                 orderpp.setOrder(order);
-
                 //根据order表order-id查询商品结果集
                 OrderItemQuery orderItemQuery = new OrderItemQuery();
                 orderItemQuery.createCriteria().andOrderIdEqualTo(order.getOrderId());
