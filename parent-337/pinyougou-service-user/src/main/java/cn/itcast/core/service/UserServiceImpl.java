@@ -1,8 +1,17 @@
 package cn.itcast.core.service;
 
+import cn.itcast.core.dao.log.PayLogDao;
+import cn.itcast.core.dao.order.OrderDao;
+import cn.itcast.core.dao.order.OrderItemDao;
 import cn.itcast.core.dao.user.UserDao;
+import cn.itcast.core.pojo.log.PayLog;
+import cn.itcast.core.pojo.log.PayLogQuery;
+import cn.itcast.core.pojo.order.Order;
+import cn.itcast.core.pojo.order.OrderItem;
+import cn.itcast.core.pojo.order.OrderItemQuery;
 import cn.itcast.core.pojo.user.User;
 import cn.itcast.core.pojo.user.UserQuery;
+import cn.itcast.core.pojogroup.Orderpp;
 import cn.itcast.core.pojogroup.UserVo;
 import cn.ithcast.core.service.UserService;
 import com.alibaba.dubbo.config.annotation.Service;
@@ -21,6 +30,7 @@ import redis.clients.jedis.Jedis;
 
 import javax.jms.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Date;
 import java.util.List;
@@ -44,6 +54,19 @@ public class UserServiceImpl implements UserService {
     // 注入UserDao对象
     @Autowired
     private UserDao userDao;
+
+    // 注入PayLogDao对象
+    @Autowired
+    private PayLogDao payLogDao;
+
+    @Autowired
+    private OrderDao orderDao;
+
+    @Autowired
+    private OrderItemDao orderItemDao;
+
+
+
 
     @Override
     public void sendCode(final String phone) {
@@ -201,6 +224,45 @@ public class UserServiceImpl implements UserService {
 
         // 返回结果
         return userVo;
+    }
+
+
+    //查询我的订单
+    @Override
+    public List<Orderpp> findAllOrders(String name) {
+        List<Orderpp> orderppList = new ArrayList<>();
+
+        //根据用户名查询订单
+        PayLogQuery query = new PayLogQuery();
+        query.createCriteria().andUserIdEqualTo(name);
+        //获取该用户多个订单
+        List<PayLog> logList = payLogDao.selectByExample(query);
+
+        for (PayLog payLog : logList) {
+            String orderList = payLog.getOrderList();
+            String[] orderList_Order_Id = orderList.split(",");
+            //根据订单号查询order表
+            for (String s : orderList_Order_Id) {
+                Orderpp orderpp = new Orderpp();
+                Order order = new Order();
+
+                order = orderDao.selectByPrimaryKey(Long.parseLong(s.trim()));
+                orderpp.setOrder(order);
+                //根据order表order-id查询商品结果集
+                OrderItemQuery orderItemQuery = new OrderItemQuery();
+                orderItemQuery.createCriteria().andOrderIdEqualTo(order.getOrderId());
+                List<OrderItem> orderItemList1 = orderItemDao.selectByExample(orderItemQuery);
+                List<OrderItem> orderItemList = new ArrayList<>();
+
+                for (OrderItem item : orderItemList1) {
+                    orderItemList.add(item);
+                }
+
+                orderpp.setOrderitemList(orderItemList);
+                orderppList.add(orderpp);
+            }
+        }
+        return orderppList;
     }
 
 

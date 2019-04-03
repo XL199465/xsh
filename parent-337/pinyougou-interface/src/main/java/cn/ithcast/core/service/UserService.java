@@ -1,8 +1,12 @@
 package cn.ithcast.core.service;
 
+import cn.itcast.core.pojo.order.Order;
 import cn.itcast.core.pojo.user.User;
+import cn.itcast.core.pojogroup.Orderpp;
 import cn.itcast.core.pojogroup.UserVo;
 import entity.PageResult;
+
+import java.util.List;
 
 public interface UserService {
     /**
@@ -45,4 +49,8 @@ public interface UserService {
      * @return
      */
     UserVo countActivity();
+
+
+    //查询我的订单
+    List<Orderpp> findAllOrders(String name);
 }

@@ -155,43 +155,7 @@ public class OrderServiceImpl implements OrderService {
         redisTemplate.boundHashOps("CART").delete(order.getUserId());
     }
 
-    //查询我的订单
-    @Override
-    public List<Orderpp> findAllOrders(String name) {
-        List<Orderpp> orderppList = new ArrayList<>();
 
-        //根据用户名查询订单
-        PayLogQuery query = new PayLogQuery();
-        query.createCriteria().andUserIdEqualTo(name);
-        //获取该用户多个订单
-        List<PayLog> logList = payLogDao.selectByExample(query);
-
-        for (PayLog payLog : logList) {
-            String orderList = payLog.getOrderList();
-            String[] orderList_Order_Id = orderList.split(",");
-            //根据订单号查询order表
-            for (String s : orderList_Order_Id) {
-                Orderpp orderpp = new Orderpp();
-                Order order = new Order();
-
-                order = orderDao.selectByPrimaryKey(Long.parseLong(s.trim()));
-                orderpp.setOrder(order);
-                //根据order表order-id查询商品结果集
-                OrderItemQuery orderItemQuery = new OrderItemQuery();
-                orderItemQuery.createCriteria().andOrderIdEqualTo(order.getOrderId());
-                List<OrderItem> orderItemList1 = orderItemDao.selectByExample(orderItemQuery);
-                List<OrderItem> orderItemList = new ArrayList<>();
-
-                for (OrderItem item : orderItemList1) {
-                    orderItemList.add(item);
-                }
-
-                orderpp.setOrderitemList(orderItemList);
-                orderppList.add(orderpp);
-            }
-        }
-        return orderppList;
-    }
 
     //商家后台查询订单
     @Override

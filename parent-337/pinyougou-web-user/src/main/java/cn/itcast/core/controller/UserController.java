@@ -30,8 +30,7 @@ public class UserController {
     @Reference
     private ItemsearchService itemsearchService;
     //注入OrderService对象
-    @Reference
-    private OrderService orderService;
+
 
     /**
      * 获取验证码
@@ -100,7 +99,7 @@ public class UserController {
     @RequestMapping("/findAllOrders")
     public List<Orderpp>findAllOrders(){
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
-        return orderService.findAllOrders(name);
+        return userService.findAllOrders(name);
     }
 
 
