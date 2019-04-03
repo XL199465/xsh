@@ -245,9 +245,21 @@ app.controller('goodsController', function ($scope, $controller, $location, good
             return false;
         }
     };
+
+    var s=document.getElementById($scope.entity.startTime);
+
+
+
     //添加到秒杀项目
     $scope.Add_seconds=function () {
-        goodsService.Add_seconds($scope.selectIds).success(
+        var s=document.getElementById('startTime');
+        var s1=new Date(s.value).getTime();
+        var o=document.getElementById('endTime');
+        var o1=new Date(o.value).getTime();
+        $scope.entity.startTime=s1;
+        $scope.entity.endTime=o1;
+
+        goodsService.Add_seconds($scope.selectIds,$scope.entity).success(
             function (response) {
                if (response.flag){
                   alert(response.message);
@@ -257,7 +269,7 @@ app.controller('goodsController', function ($scope, $controller, $location, good
                }
             }
         )
-    }
+    };
 
 
     //查询订单

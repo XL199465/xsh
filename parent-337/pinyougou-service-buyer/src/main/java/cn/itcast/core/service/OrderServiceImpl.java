@@ -6,12 +6,15 @@ import cn.itcast.core.dao.order.OrderDao;
 import cn.itcast.core.dao.order.OrderItemDao;
 import cn.itcast.core.pojo.item.Item;
 import cn.itcast.core.pojo.log.PayLog;
+import cn.itcast.core.pojo.log.PayLogQuery;
 import cn.itcast.core.pojo.order.Order;
 import cn.itcast.core.pojo.order.OrderItem;
+import cn.itcast.core.pojo.order.OrderItemQuery;
 import cn.ithcast.core.service.CartService;
 import cn.ithcast.core.service.OrderService;
 import com.alibaba.dubbo.config.annotation.Service;
 import entity.Cart;
+import cn.itcast.core.pojogroup.Orderpp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
@@ -150,4 +153,45 @@ public class OrderServiceImpl implements OrderService {
         // 最后清空购物车
         redisTemplate.boundHashOps("CART").delete(order.getUserId());
     }
+
+    //查询我的订单
+    @Override
+    public List<Orderpp> findAllOrders(String name) {
+        List<Orderpp> orderppList = new ArrayList<>();
+
+        //根据用户名查询订单
+        PayLogQuery query = new PayLogQuery();
+        query.createCriteria().andUserIdEqualTo(name);
+        //获取该用户多个订单
+        List<PayLog> logList = payLogDao.selectByExample(query);
+
+        for (PayLog payLog : logList) {
+            String orderList = payLog.getOrderList();
+            String[] orderList_Order_Id = orderList.split(",");
+            //根据订单号查询order表
+            for (String s : orderList_Order_Id) {
+                Orderpp orderpp = new Orderpp();
+                Order order = new Order();
+
+                order = orderDao.selectByPrimaryKey(Long.parseLong(s.trim()));
+                orderpp.setOrder(order);
+                //根据order表order-id查询商品结果集
+                OrderItemQuery orderItemQuery = new OrderItemQuery();
+                orderItemQuery.createCriteria().andOrderIdEqualTo(order.getOrderId());
+                List<OrderItem> orderItemList1 = orderItemDao.selectByExample(orderItemQuery);
+                List<OrderItem> orderItemList = new ArrayList<>();
+
+                for (OrderItem item : orderItemList1) {
+                    orderItemList.add(item);
+                }
+
+                orderpp.setOrderitemList(orderItemList);
+                orderppList.add(orderpp);
+            }
+        }
+        return orderppList;
+    }
+        /* OrderQuery orderQuery = new OrderQuery();
+           orderQuery.createCriteria().andSellerIdEqualTo(name);
+           return orderDao.selectByExample(orderQuery);*/
 }

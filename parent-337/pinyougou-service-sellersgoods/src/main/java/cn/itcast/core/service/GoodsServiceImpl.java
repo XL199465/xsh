@@ -5,6 +5,7 @@ import cn.itcast.core.dao.good.GoodsDao;
 import cn.itcast.core.dao.good.GoodsDescDao;
 import cn.itcast.core.dao.item.ItemCatDao;
 import cn.itcast.core.dao.item.ItemDao;
+import cn.itcast.core.dao.seckill.SeckillGoodsDao;
 import cn.itcast.core.dao.seller.SellerDao;
 import cn.itcast.core.pojo.good.Brand;
 import cn.itcast.core.pojo.good.Goods;
@@ -13,6 +14,7 @@ import cn.itcast.core.pojo.good.GoodsQuery;
 import cn.itcast.core.pojo.item.Item;
 import cn.itcast.core.pojo.item.ItemCat;
 import cn.itcast.core.pojo.item.ItemQuery;
+import cn.itcast.core.pojo.seckill.SeckillGoods;
 import cn.itcast.core.pojo.seller.Seller;
 import cn.itcast.core.pojogroup.GoodsVo;
 import cn.ithcast.core.service.GoodsDetailService;
@@ -401,20 +403,43 @@ public class GoodsServiceImpl implements GoodsService {
         }
     }
 
+    //引入秒杀表
+    @Autowired
+    private SeckillGoodsDao seckillGoodsDao;
 
     /**
      * 添加到秒杀
+     *
      * @param ids
      * @return
      */
     @Override
-    public Result addSeconds(Long[] ids) {
-        if (ids.length>0){
+    public Result addSeconds(Long[] ids, SeckillGoods seckillGoods) {
+        if (ids.length > 0) {
+            for (Long id : ids) {
+                ItemQuery itemQuery = new ItemQuery();
+                itemQuery.createCriteria().andGoodsIdEqualTo(id);
+                List<Item> itemList = itemDao.selectByExample(itemQuery);
+                for (Item item : itemList) {
 
+                    seckillGoods.setItemId(item.getId());
+                    seckillGoods.setGoodsId(item.getGoodsId());
+                    seckillGoods.setSellerId(item.getSellerId());
+                    seckillGoods.setTitle(item.getTitle());
+                    seckillGoods.setSmallPic(item.getImage());
+                    seckillGoods.setPrice(item.getPrice());
+                    seckillGoods.setCreateTime(new Date());
+                    //添加未审核
+                    seckillGoods.setStatus("0");
+                    seckillGoods.setNum(item.getNum());
+                    seckillGoods.setIntroduction(item.getSellPoint());
 
+                    seckillGoodsDao.insertSelective(seckillGoods);
 
-
+                }
+            }
+            return new Result(true,"添加秒杀成功");
         }
-        return new Result(false,"没有选中数据");
+        return new Result(false, "没有选中数据");
     }
 }

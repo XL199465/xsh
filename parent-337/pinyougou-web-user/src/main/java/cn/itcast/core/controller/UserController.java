@@ -3,22 +3,18 @@ package cn.itcast.core.controller;
 import cn.itcast.core.common.utils.PhoneFormatCheckUtils;
 import cn.itcast.core.pojo.item.Item;
 import cn.itcast.core.pojo.user.User;
-import cn.ithcast.core.service.GoodsService;
 import cn.ithcast.core.service.ItemsearchService;
+import cn.ithcast.core.service.OrderService;
 import cn.ithcast.core.service.UserService;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.alibaba.fastjson.JSON;
-import entity.Cart;
-import entity.PageResult;
+import cn.itcast.core.pojogroup.Orderpp;
 import entity.Result;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +29,9 @@ public class UserController {
     //注入goodsService对象
     @Reference
     private ItemsearchService itemsearchService;
+    //注入OrderService对象
+    @Reference
+    private OrderService orderService;
 
     /**
      * 获取验证码
@@ -97,7 +96,12 @@ public class UserController {
        return itemList;
 
     }
-
+    //查询我的订单
+    @RequestMapping("/findAllOrders")
+    public List<Orderpp>findAllOrders(){
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        return orderService.findAllOrders(name);
+    }
 
 
 }
