@@ -10,5 +10,11 @@ app.service('loginService',function($http){
     this.findAllOrders=function(){
         return $http.get('../user/findAllOrders.do');
     }
+
+    //查询收货地址
+    this.findAllAddress=function(){
+        return $http.get('../user/findAllAddress.do');
+    }
+
 	
 });

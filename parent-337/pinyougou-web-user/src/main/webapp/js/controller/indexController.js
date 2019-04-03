@@ -17,4 +17,12 @@ app.controller('indexController',function($scope,loginService){
             }
         )
     };
+    //查询收获地址
+    $scope.findAllAddress = function () {
+        loginService.findAllAddress().success(
+            function (response) {
+                $scope.addressList = response;
+            }
+        )
+    };
 });

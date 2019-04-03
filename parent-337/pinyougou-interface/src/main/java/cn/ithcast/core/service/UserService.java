@@ -1,5 +1,6 @@
 package cn.ithcast.core.service;
 
+import cn.itcast.core.pojo.address.Address;
 import cn.itcast.core.pojo.order.Order;
 import cn.itcast.core.pojo.user.User;
 import cn.itcast.core.pojogroup.Orderpp;
@@ -53,4 +54,7 @@ public interface UserService {
 
     //查询我的订单
     List<Orderpp> findAllOrders(String name);
+
+    //收货地址
+    List<Address> findAllAddress(String name);
 }

@@ -1,9 +1,12 @@
 package cn.itcast.core.service;
 
+import cn.itcast.core.dao.address.AddressDao;
 import cn.itcast.core.dao.log.PayLogDao;
 import cn.itcast.core.dao.order.OrderDao;
 import cn.itcast.core.dao.order.OrderItemDao;
 import cn.itcast.core.dao.user.UserDao;
+import cn.itcast.core.pojo.address.Address;
+import cn.itcast.core.pojo.address.AddressQuery;
 import cn.itcast.core.pojo.log.PayLog;
 import cn.itcast.core.pojo.log.PayLogQuery;
 import cn.itcast.core.pojo.order.Order;
@@ -64,6 +67,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private OrderItemDao orderItemDao;
+
+    @Autowired
+    private AddressDao addressDao;
 
 
 
@@ -263,6 +269,23 @@ public class UserServiceImpl implements UserService {
             }
         }
         return orderppList;
+    }
+
+    @Override
+    public List<Address> findAllAddress(String name) {
+        ArrayList<Address> addressList = new ArrayList<>();
+        //根据用户名查询地址
+        AddressQuery query = new AddressQuery();
+        query.createCriteria().andUserIdEqualTo(name);
+
+        //获取该用户的多个地址列表
+        List<Address> addresses = addressDao.selectByExample(query);
+        for (Address address : addresses) {
+            addressList.add(address);
+
+        }
+
+        return addressList;
     }
 
 
