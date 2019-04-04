@@ -1,7 +1,7 @@
 package cn.itcast.core.controller;
 
 import cn.itcast.core.pojo.good.Brand;
-import cn.ithcast.core.service.BrandService;
+import cn.itcast.core.service.BrandService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import entity.PageResult;
 import entity.Result;

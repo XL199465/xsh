@@ -3,7 +3,6 @@ package cn.itcast.core.service;
 import cn.itcast.core.dao.seckill.SeckillGoodsDao;
 import cn.itcast.core.pojo.seckill.SeckillGoods;
 import cn.itcast.core.pojo.seckill.SeckillGoodsQuery;
-import cn.ithcast.core.service.SeckillAuditService;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import entity.PageResult;

@@ -1,7 +1,7 @@
 package cn.itcast.core.controller;
 
 import cn.itcast.core.pojo.seller.Seller;
-import cn.ithcast.core.service.SellerService;
+import cn.itcast.core.service.SellerService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import entity.Result;
 import org.springframework.security.core.context.SecurityContext;

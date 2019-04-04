@@ -1,4 +1,4 @@
-package cn.ithcast.core.service;
+package cn.itcast.core.service;
 
 public interface GoodsDetailService {
 

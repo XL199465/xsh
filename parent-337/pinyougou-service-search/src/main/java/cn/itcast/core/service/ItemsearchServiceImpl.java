@@ -2,21 +2,16 @@ package cn.itcast.core.service;
 
 import cn.itcast.core.dao.item.ItemDao;
 import cn.itcast.core.pojo.item.Item;
-import cn.itcast.core.pojo.item.ItemCat;
-import cn.ithcast.core.service.ItemsearchService;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.redis.core.BoundValueOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.*;
 import org.springframework.data.solr.core.query.result.*;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 @Service

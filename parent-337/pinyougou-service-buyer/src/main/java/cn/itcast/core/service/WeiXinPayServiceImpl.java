@@ -4,7 +4,6 @@ import cn.itcast.core.common.utils.HttpClient;
 import cn.itcast.core.dao.order.OrderDao;
 import cn.itcast.core.pojo.log.PayLog;
 import cn.itcast.core.pojo.order.Order;
-import cn.ithcast.core.service.WeiXinPayService;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.wxpay.sdk.WXPayUtil;
 import org.springframework.beans.factory.annotation.Autowired;

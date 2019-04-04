@@ -1,7 +1,6 @@
 package cn.itcast.core.controller;
 
-import cn.itcast.core.common.utils.IdWorker;
-import cn.ithcast.core.service.WeiXinPayService;
+import cn.itcast.core.service.WeiXinPayService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import entity.Result;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -3,7 +3,6 @@ package cn.itcast.core.service;
 import cn.itcast.core.dao.seller.SellerDao;
 import cn.itcast.core.pojo.seller.Seller;
 import cn.itcast.core.pojo.seller.SellerQuery;
-import cn.ithcast.core.service.SellerService;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -11,7 +10,6 @@ import entity.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class SellerServiceImpl implements SellerService {

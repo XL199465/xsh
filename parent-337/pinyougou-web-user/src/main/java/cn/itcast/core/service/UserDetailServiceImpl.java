@@ -1,6 +1,5 @@
 package cn.itcast.core.service;
 
-import cn.ithcast.core.service.UserService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

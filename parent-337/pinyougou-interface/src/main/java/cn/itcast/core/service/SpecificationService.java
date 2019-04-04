@@ -1,9 +1,8 @@
-package cn.ithcast.core.service;
+package cn.itcast.core.service;
 
 import cn.itcast.core.pojo.specification.Specification;
 import cn.itcast.core.pojogroup.SpecificationVo;
 import entity.PageResult;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;

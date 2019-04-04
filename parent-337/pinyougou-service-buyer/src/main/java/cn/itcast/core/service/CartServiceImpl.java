@@ -3,7 +3,6 @@ package cn.itcast.core.service;
 import cn.itcast.core.dao.item.ItemDao;
 import cn.itcast.core.pojo.item.Item;
 import cn.itcast.core.pojo.order.OrderItem;
-import cn.ithcast.core.service.CartService;
 import com.alibaba.dubbo.config.annotation.Service;
 import entity.Cart;
 import entity.Collect;

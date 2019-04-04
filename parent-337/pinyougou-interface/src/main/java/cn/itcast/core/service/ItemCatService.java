@@ -1,4 +1,4 @@
-package cn.ithcast.core.service;
+package cn.itcast.core.service;
 
 import cn.itcast.core.pojo.item.ItemCat;
 import entity.Result;

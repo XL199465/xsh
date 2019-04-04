@@ -1,7 +1,7 @@
 package cn.itcast.core.controller;
 
 import cn.itcast.core.pojo.address.Address;
-import cn.ithcast.core.service.AddressService;
+import cn.itcast.core.service.AddressService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;

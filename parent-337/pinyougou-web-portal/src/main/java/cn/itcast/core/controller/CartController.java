@@ -1,14 +1,11 @@
 package cn.itcast.core.controller;
 
-import cn.itcast.core.pojo.item.Item;
 import cn.itcast.core.pojo.order.OrderItem;
-import cn.ithcast.core.service.CartService;
+import cn.itcast.core.service.CartService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
 import entity.Cart;
 import entity.Result;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;

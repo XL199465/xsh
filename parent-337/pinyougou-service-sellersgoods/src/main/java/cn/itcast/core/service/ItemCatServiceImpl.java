@@ -3,7 +3,6 @@ package cn.itcast.core.service;
 import cn.itcast.core.dao.item.ItemCatDao;
 import cn.itcast.core.pojo.item.ItemCat;
 import cn.itcast.core.pojo.item.ItemCatQuery;
-import cn.ithcast.core.service.ItemCatService;
 import com.alibaba.dubbo.config.annotation.Service;
 import entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;

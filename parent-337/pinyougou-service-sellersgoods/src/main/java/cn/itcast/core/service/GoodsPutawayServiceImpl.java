@@ -4,9 +4,6 @@ import cn.itcast.core.dao.good.GoodsDao;
 import cn.itcast.core.dao.item.ItemDao;
 import cn.itcast.core.pojo.good.Goods;
 import cn.itcast.core.pojo.good.GoodsQuery;
-import cn.itcast.core.pojo.item.Item;
-import cn.itcast.core.pojo.item.ItemQuery;
-import cn.ithcast.core.service.GoodsPutawayService;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -21,7 +18,6 @@ import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
-import java.util.List;
 
 @SuppressWarnings("all")
 @Service

@@ -2,7 +2,6 @@ package cn.itcast.core.service;
 
 import cn.itcast.core.dao.ad.ContentCategoryDao;
 import cn.itcast.core.pojo.ad.ContentCategory;
-import cn.ithcast.core.service.ContentCategoryService;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;

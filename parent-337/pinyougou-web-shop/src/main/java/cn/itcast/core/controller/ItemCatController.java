@@ -2,12 +2,10 @@ package cn.itcast.core.controller;
 
 
 import cn.itcast.core.pojo.item.ItemCat;
-import cn.itcast.core.pojo.order.Order;
-import cn.ithcast.core.service.ItemCatService;
-import cn.ithcast.core.service.OrderService;
+import cn.itcast.core.service.ItemCatService;
+import cn.itcast.core.service.OrderService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import entity.Result;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

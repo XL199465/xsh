@@ -6,14 +6,11 @@ import cn.itcast.core.pojo.seckill.SeckillGoods;
 import cn.itcast.core.pojo.seckill.SeckillGoodsQuery;
 import cn.itcast.core.pojo.seckill.SeckillOrder;
 import cn.itcast.core.pojo.seckill.SeckillOrderQuery;
-import cn.ithcast.core.service.SeckillService;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import entity.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 @Service
 public class SeckillServiceImpl implements SeckillService {

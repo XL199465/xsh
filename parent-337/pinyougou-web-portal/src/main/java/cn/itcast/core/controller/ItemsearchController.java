@@ -1,6 +1,6 @@
 package cn.itcast.core.controller;
 
-import cn.ithcast.core.service.ItemsearchService;
+import cn.itcast.core.service.ItemsearchService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

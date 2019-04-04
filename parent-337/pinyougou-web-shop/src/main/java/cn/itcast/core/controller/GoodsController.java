@@ -3,7 +3,7 @@ package cn.itcast.core.controller;
 import cn.itcast.core.pojo.good.Goods;
 import cn.itcast.core.pojo.seckill.SeckillGoods;
 import cn.itcast.core.pojogroup.GoodsVo;
-import cn.ithcast.core.service.GoodsService;
+import cn.itcast.core.service.GoodsService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import entity.PageResult;
 import entity.Result;
@@ -12,8 +12,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/goods")

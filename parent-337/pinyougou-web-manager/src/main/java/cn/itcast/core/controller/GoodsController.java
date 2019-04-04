@@ -2,12 +2,10 @@ package cn.itcast.core.controller;
 
 import cn.itcast.core.pojo.good.Goods;
 import cn.itcast.core.pojogroup.GoodsVo;
-import cn.ithcast.core.service.GoodsService;
+import cn.itcast.core.service.GoodsService;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.sun.org.apache.regexp.internal.RE;
 import entity.PageResult;
 import entity.Result;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

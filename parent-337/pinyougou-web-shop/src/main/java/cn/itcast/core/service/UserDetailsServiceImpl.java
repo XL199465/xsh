@@ -1,8 +1,6 @@
 package cn.itcast.core.service;
 
 import cn.itcast.core.pojo.seller.Seller;
-import cn.ithcast.core.service.SellerService;
-import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

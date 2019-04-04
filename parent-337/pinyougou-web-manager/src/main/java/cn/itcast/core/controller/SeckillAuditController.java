@@ -1,6 +1,6 @@
 package cn.itcast.core.controller;
 
-import cn.ithcast.core.service.SeckillAuditService;
+import cn.itcast.core.service.SeckillAuditService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import entity.PageResult;
 import entity.Result;

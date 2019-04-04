@@ -2,7 +2,7 @@ package cn.itcast.core.controller;
 
 import cn.itcast.core.pojo.user.User;
 import cn.itcast.core.pojogroup.UserVo;
-import cn.ithcast.core.service.UserService;
+import cn.itcast.core.service.UserService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import entity.PageResult;
 import entity.Result;

@@ -1,7 +1,7 @@
 package cn.itcast.core.controller;
 
 import cn.itcast.core.pojo.ad.ContentCategory;
-import cn.ithcast.core.service.ContentCategoryService;
+import cn.itcast.core.service.ContentCategoryService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import entity.PageResult;
 import entity.Result;

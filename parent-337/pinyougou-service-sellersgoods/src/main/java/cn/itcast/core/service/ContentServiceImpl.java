@@ -3,7 +3,6 @@ package cn.itcast.core.service;
 import cn.itcast.core.dao.ad.ContentDao;
 import cn.itcast.core.pojo.ad.Content;
 import cn.itcast.core.pojo.ad.ContentQuery;
-import cn.ithcast.core.service.ContentService;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;

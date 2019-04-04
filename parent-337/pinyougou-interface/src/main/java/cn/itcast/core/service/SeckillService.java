@@ -1,4 +1,4 @@
-package cn.ithcast.core.service;
+package cn.itcast.core.service;
 
 import cn.itcast.core.pojo.seckill.SeckillGoods;
 import cn.itcast.core.pojo.seckill.SeckillOrder;

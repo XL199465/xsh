@@ -10,8 +10,6 @@ import cn.itcast.core.pojo.log.PayLogQuery;
 import cn.itcast.core.pojo.order.Order;
 import cn.itcast.core.pojo.order.OrderItem;
 import cn.itcast.core.pojo.order.OrderItemQuery;
-import cn.ithcast.core.service.CartService;
-import cn.ithcast.core.service.OrderService;
 import com.alibaba.dubbo.config.annotation.Service;
 import entity.Cart;
 import cn.itcast.core.pojogroup.Orderpp;

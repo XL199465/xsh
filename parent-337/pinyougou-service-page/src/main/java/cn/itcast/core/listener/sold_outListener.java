@@ -1,6 +1,6 @@
 package cn.itcast.core.listener;
 
-import cn.ithcast.core.service.Sold_outService;
+import cn.itcast.core.service.Sold_outService;
 import org.apache.activemq.command.ActiveMQTextMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.solr.core.SolrTemplate;

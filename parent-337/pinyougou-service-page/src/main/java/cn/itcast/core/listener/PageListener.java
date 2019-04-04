@@ -1,9 +1,8 @@
 package cn.itcast.core.listener;
 
-import cn.ithcast.core.service.GoodsDetailService;
+import cn.itcast.core.service.GoodsDetailService;
 import org.apache.activemq.command.ActiveMQTextMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.solr.core.SolrTemplate;
 
 import javax.jms.JMSException;
 import javax.jms.Message;

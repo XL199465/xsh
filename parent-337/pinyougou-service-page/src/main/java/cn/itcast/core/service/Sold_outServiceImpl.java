@@ -1,6 +1,5 @@
 package cn.itcast.core.service;
 
-import cn.ithcast.core.service.Sold_outService;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.web.context.ServletContextAware;
 

@@ -8,7 +8,6 @@ import cn.itcast.core.pojo.good.Goods;
 import cn.itcast.core.pojo.good.GoodsDesc;
 import cn.itcast.core.pojo.item.Item;
 import cn.itcast.core.pojo.item.ItemQuery;
-import cn.ithcast.core.service.GoodsDetailService;
 import com.alibaba.dubbo.config.annotation.Service;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
