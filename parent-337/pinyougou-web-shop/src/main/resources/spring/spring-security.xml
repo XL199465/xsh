@@ -73,11 +73,11 @@
     <dubbo:application name="pinyougou-shop-web"/>
     <dubbo:registry address="zookeeper://192.168.200.128:2181"/>
     <!--reference:引用,表示我要使用哪个服务接口-->
-    <dubbo:reference id="sellerService" interface="cn.itcast.core.service.SellerService"
+    <dubbo:reference id="sellerService" interface="cn.ithcast.core.service.SellerService"
     ></dubbo:reference>
 
     <!--bean:是实例化对象-->
-    <beans:bean id="userDetailService" class="cn.itcast.core.service.UserDetailsServiceImpl">
+    <beans:bean id="userDetailService" class="cn.ithcast.core.service.UserDetailsServiceImpl">
         <!--property:是通过set方法,依赖注入SellerService对象-->
         <beans:property name="sellerService" ref="sellerService"></beans:property>
     </beans:bean>

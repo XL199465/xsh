@@ -22,6 +22,6 @@
     </bean>
     <!--配置Mapper映射文件-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="cn.itcast.core.dao"/>
+        <property name="basePackage" value="cn.ithcast.core.dao"/>
     </bean>
 </beans>

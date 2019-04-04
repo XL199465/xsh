@@ -10,9 +10,14 @@
 
     <link rel="stylesheet" type="text/css" href="css/webbase.css" />
     <link rel="stylesheet" type="text/css" href="css/pages-seckillOrder.css" />
+
+	<script type="text/javascript" src="plugins/angularjs/angular.min.js"></script>
+	<script type="text/javascript" src="js/base.js"></script>
+	<script type="text/javascript" src="js/service/loginService.js"></script>
+	<script type="text/javascript" src="js/controller/indexController.js"></script>
 </head>
 
-<body>
+<body ng-app="pinyougou" ng-controller="indexController" ng-init="findAllAddress()">
     <!-- 头部栏位 -->
     <!--页面顶部-->
 <div id="nav-bottom">
@@ -205,27 +210,18 @@ $(function(){
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>刘田田</td>
-                                        <td>北京 北京市 海淀区 上地街道东北旺西路8号中关村软件园9号楼</td>
-                                        <td>1774***********4</td>
+                                    <tr  ng-repeat="address in addressList">
+                                        <td>{{address.contact}}</td>
+                                        <td>{{address.address}}</td>
+                                        <td>{{address.mobile}}</td>
                                         <td>
                                             <a href="#">编辑</a>
                                             <a href="#">删除</a>
                                             默认地址
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>沈沉</td>
-                                        <td>北京 北京市 海淀区 上地街道东北旺西路8号中关村软件园9号楼</td>
-                                        <td>1774***********4</td>
-                                        <td>
-                                            <a href="#">编辑</a>
-                                            <a href="#">删除</a>
-                                            <a href="#">设为默认</a>
-                                        </td>
-                                    </tr>
-                                    
+
+
                                 </tbody>
                             </table>                          
                         </div>

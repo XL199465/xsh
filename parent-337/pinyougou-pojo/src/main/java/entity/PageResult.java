@@ -1,7 +1,5 @@
 package entity;
 
-import cn.itcast.core.pojo.good.Brand;
-
 import java.io.Serializable;
 import java.util.List;
 

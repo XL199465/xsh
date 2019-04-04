@@ -31,7 +31,7 @@
 
 </head>
 
-<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="goodsController" ng-init="findAllOrders()">
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="goodsController">
 <!-- .box-body -->
 
 <div class="box-header with-border">
@@ -48,7 +48,7 @@
             <div class="form-group form-inline">
                 <div class="btn-group">
                     <button type="button" class="btn btn-default" title="删除订单"><i class="fa fa-trash-o"></i> 删除订单</button>
-                    <button type="button" class="btn btn-default" title="订单发货"><i class="fa fa-check"></i> 订单发货</button>
+                    <button type="button" class="btn btn-default" ng-click="ordersShipment()"  onclick="window.location.reload();"title="订单发货"><i class="fa fa-check"></i> 订单发货</button>
 
                     <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i
                             class="fa fa-refresh"></i> 刷新
@@ -56,18 +56,36 @@
                 </div>
             </div>
         </div>
-        <div class="box-tools pull-right">
+
+
+        <!--<div class="box-tools pull-right">
             <div class="has-feedback">
                 状态：
                 <select ng-model="searchEntity.auditStatus">
                     <option value="">全部</option>
-                    <option value="0">已发货</option>
-                    <option value="1">未发货</option>
-                    <option value="2">已付款</option>
-                    <option value="2">未付款</option>
+                    <option value="1">已发货</option>
+                    <option value="2">未发货</option>
                 </select>
             </div>
+        </div>-->
+
+
+        <button type="button" class="btn btn-default pull-right" ng-click="reloadList()" title="查询"><i class="fa fa-trash-o"></i> 查询</button>
+
+
+        <div class="box-tools">
+            <div class="has-feedback pull-right">
+                订单统计
+                <select ng-model="searchEntity.auditStatus">
+                    <option value="">请选择日期</option>
+                    <option value="1" selected="selected" >0天~7天</option>
+                    <option value="2" >7天~一个月</option>
+                    <option value="3">一个月~一年</option>
+                </select>
+            </div>
+
         </div>
+
         <!--工具栏/-->
 
         <!--数据列表-->
@@ -84,30 +102,26 @@
                 <th class="sorting">收货人</th>
                 <th class="sorting">实付金额</th>
                 <th class="sorting">状态</th>
-                <th class="text-center">操作</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="entity in Orderlist">
-                <td><input type="checkbox"></td>
+                <td><input ng-click="updateSelection($event, entity.orderId)" type="checkbox"></td>
                 <td>{{entity.orderId}}</td>
-                <td>{{entity.updateTime}}</td>
+                <td>{{entity.paymentTime}}</td>
                 <td>{{entity.receiverMobile}}</td>
                 <td>{{entity.receiverAreaName}}</td>
                 <td>{{entity.receiver}}</td>
                 <td>{{entity.payment}}</td>
                 <td>
-                    {{entity.status}}
+                    {{entity.status ==1?"未发货":"已发货"}}
                 </td>
 
-                <td class="text-center">
-                    <a class="btn bg-olive btn-xs" href="goods_edit.html#?id={{entity.id}}">修改</a>
-                </td>
             </tr>
             </tbody>
         </table>
-        <!--&lt;!&ndash;数据列表/&ndash;&gt;
-        <tm-pagination conf="paginationConf"></tm-pagination>-->
+        <!--数据列表/-->
+        <tm-pagination conf="paginationConf"></tm-pagination>
 
     </div>
     <!-- 数据表格 /-->

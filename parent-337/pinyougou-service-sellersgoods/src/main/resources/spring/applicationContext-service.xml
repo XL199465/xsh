@@ -14,6 +14,6 @@
     <dubbo:registry address="zookeeper://192.168.200.128:2181"/>
 
     <!--配置包扫描-->
-    <dubbo:annotation package="cn.itcast.core.service"/>
+    <dubbo:annotation package="cn.ithcast.core.service"/>
 
 </beans>

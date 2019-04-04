@@ -29,7 +29,7 @@
         <property name="destination" ref="topicPageAndSolrDestination"/>
         <property name="messageListener" ref="pageListener"/>
     </bean>
-    <bean id="pageListener" class="cn.itcast.core.listener.PageListener"></bean>
+    <bean id="pageListener" class="cn.ithcast.core.listener.PageListener"></bean>
 
 
 
@@ -44,6 +44,6 @@
         <property name="destination" ref="queueSolrDeleteDestination"/>
         <property name="messageListener" ref="sold_outListener"/>
     </bean>
-    <bean id="sold_outListener" class="cn.itcast.core.listener.sold_outListener"></bean>
+    <bean id="sold_outListener" class="cn.ithcast.core.listener.sold_outListener"></bean>
 
 </beans>

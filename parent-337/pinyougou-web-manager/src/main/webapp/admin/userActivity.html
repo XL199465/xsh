@@ -16,12 +16,12 @@
     <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
     <script type="text/javascript" src="../js/base.js"></script>
     <script type="text/javascript" src="../js/service/userService.js"></script>
+    <script type="text/javascript" src="../js/service/excelService.js"></script>
     <script type="text/javascript" src="../js/controller/basecontroller.js"></script>
     <script type="text/javascript" src="../js/controller/userController.js"></script>
 </head>
 
-<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="userController"
-      ng-init="countActivity()">
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="userController" ng-init="countActivity()">
 <!-- .box-body -->
 <div class="box-header with-border">
     <h3 class="box-title">用户活跃度分析</h3>
@@ -32,28 +32,28 @@
     <!-- 数据表格 -->
     <div class="table-box">
 
-        <!--工具栏-->
-        <div class="pull-left">
-            <div class="form-group form-inline">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default" title="新建" data-toggle="modal"
-                            data-target="#editModal"><i class="fa fa-file-o"></i> 新建
-                    </button>
-                    <button ng-click="updateStatus()" type="button" class="btn btn-default" title="冻结"><i
-                            class="fa fa-trash-o"></i> 冻结
-                    </button>
-                    <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i
-                            class="fa fa-refresh"></i> 刷新
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="box-tools pull-right">
-            <div class="has-feedback">
-                用户名称：<input ng-model="searchEntity.username">
-                <button ng-click="reloadList()" class="btn btn-default">查询</button>
-            </div>
-        </div>
+        <!--&lt;!&ndash;工具栏&ndash;&gt;-->
+        <!--<div class="pull-left">-->
+            <!--<div class="form-group form-inline">-->
+                <!--<div class="btn-group">-->
+                    <!--<button type="button" class="btn btn-default" title="新建" data-toggle="modal"-->
+                            <!--data-target="#editModal"><i class="fa fa-file-o"></i> 新建-->
+                    <!--</button>-->
+                    <!--<button ng-click="updateStatus()" type="button" class="btn btn-default" title="冻结"><i-->
+                            <!--class="fa fa-trash-o"></i> 冻结-->
+                    <!--</button>-->
+                    <!--<button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i-->
+                            <!--class="fa fa-refresh"></i> 刷新-->
+                    <!--</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="box-tools pull-right">-->
+            <!--<div class="has-feedback">-->
+                <!--用户名称：<input ng-model="searchEntity.username">-->
+                <!--<button ng-click="reloadList()" class="btn btn-default">查询</button>-->
+            <!--</div>-->
+        <!--</div>-->
         <!--工具栏/-->
 
         <!--数据列表-->

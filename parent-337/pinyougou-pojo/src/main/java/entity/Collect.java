@@ -1,6 +1,6 @@
 package entity;
 
-import cn.itcast.core.pojo.order.OrderItem;
+import cn.ithcast.core.pojo.order.OrderItem;
 
 import java.io.Serializable;
 import java.util.List;
