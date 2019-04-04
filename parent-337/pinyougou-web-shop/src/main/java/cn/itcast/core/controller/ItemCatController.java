@@ -6,12 +6,14 @@ import cn.itcast.core.pojo.order.Order;
 import cn.ithcast.core.service.ItemCatService;
 import cn.ithcast.core.service.OrderService;
 import com.alibaba.dubbo.config.annotation.Reference;
+import entity.PageResult;
 import entity.Result;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -88,12 +90,12 @@ public class ItemCatController {
     @Reference
     private OrderService orderService;
 
-    @RequestMapping("/findAllOrders")
-    public List<Order> findAllOrders(){
+    @RequestMapping("/searchs")
+    public PageResult searchs(Integer num , Integer size , Integer a){
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
 
         System.out.println(name);
-        return orderService.findAllOrders(name);
+        return orderService.findAllOrder(name , num , size , a);
     }
 
     //订单发货
@@ -107,4 +109,11 @@ public class ItemCatController {
             return new Result(false,"发货失败!");
         }
     }
+
+    /*//订单统计
+    @RequestMapping("/ordersStatistics")
+    public List<Order> ordersStatistics(Integer a){
+        System.out.println(a);
+        return orderService.ordersStatistics(a);
+    }*/
 }

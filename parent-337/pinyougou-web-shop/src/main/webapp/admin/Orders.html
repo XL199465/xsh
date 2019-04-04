@@ -31,7 +31,7 @@
 
 </head>
 
-<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="goodsController" ng-init="findAllOrders()">
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="goodsController">
 <!-- .box-body -->
 
 <div class="box-header with-border">
@@ -70,18 +70,21 @@
         </div>-->
 
 
+        <button type="button" class="btn btn-default pull-right" ng-click="reloadList()" title="查询"><i class="fa fa-trash-o"></i> 查询</button>
+
+
         <div class="box-tools">
             <div class="has-feedback pull-right">
                 订单统计
                 <select ng-model="searchEntity.auditStatus">
-                    <option value="1" ng-click="">0天~7天</option>
-                    <option value="2">7天~一个月</option>
-                    <option value="3">一个月~六个月</option>
+                    <option value="">请选择日期</option>
+                    <option value="1" selected="selected" >0天~7天</option>
+                    <option value="2" >7天~一个月</option>
+                    <option value="3">一个月~一年</option>
                 </select>
             </div>
+
         </div>
-
-
 
         <!--工具栏/-->
 
@@ -105,7 +108,7 @@
             <tr ng-repeat="entity in Orderlist">
                 <td><input ng-click="updateSelection($event, entity.orderId)" type="checkbox"></td>
                 <td>{{entity.orderId}}</td>
-                <td>{{entity.updateTime}}</td>
+                <td>{{entity.paymentTime}}</td>
                 <td>{{entity.receiverMobile}}</td>
                 <td>{{entity.receiverAreaName}}</td>
                 <td>{{entity.receiver}}</td>
@@ -117,8 +120,8 @@
             </tr>
             </tbody>
         </table>
-        <!--&lt;!&ndash;数据列表/&ndash;&gt;
-        <tm-pagination conf="paginationConf"></tm-pagination>-->
+        <!--数据列表/-->
+        <tm-pagination conf="paginationConf"></tm-pagination>
 
     </div>
     <!-- 数据表格 /-->

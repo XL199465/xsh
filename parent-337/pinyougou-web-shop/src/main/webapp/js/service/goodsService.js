@@ -18,18 +18,27 @@ app.service('goodsService', function ($http) {
 
 
     //查询全部订单
-    this.findAllOrders = function () {
-        return $http.get('../itemCat/findAllOrders.do');
+    this.findAllOrder = function () {
+        return $http.get('../itemCat/findAllOrder.do');
 
     }
         //添加到秒杀表
-    this.Add_seconds = function (ids) {
-        return $http.post('../goods/addSeconds?ids=' + ids);
+    this.Add_seconds = function (ids,seckillGoods) {
+        return $http.post('../goods/addSeconds.do?ids=' + ids,seckillGoods);
     }
 
     //订单发货
     this.ordersShipment = function (ids) {
         return $http.post('../itemCat/ordersShipment.do?ids='+ids);
     }
+    
+    //订单统计
+    this.ordersStatistics = function (a) {
+        return $http.post('../itemCat/ordersStatistics.do?a='+a);
+    }
 
+
+    this.searchs = function (num, size, a) {
+        return $http.post('../itemCat/searchs.do?num=' + num + '&size=' + size + '&a='+a);
+    };
 });

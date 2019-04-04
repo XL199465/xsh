@@ -2,10 +2,10 @@ package cn.itcast.core.dao.good;
 
 import cn.itcast.core.pojo.good.Brand;
 import cn.itcast.core.pojo.good.BrandQuery;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
 
 public interface BrandDao {
     int countByExample(BrandQuery example);
@@ -30,6 +30,9 @@ public interface BrandDao {
 
     int updateByPrimaryKey(Brand record);
 
-    // 从品牌表中查询出来id和name存入集合 查出来的每一行都存入一个集合中 所以是list集合中存放多个map集合
+    /**
+     * 查询id和name,存入一个map集合 并将多个这样的集合存入list集合中
+     * @return
+     */
     List<Map> selectOptionList();
 }

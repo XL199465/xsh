@@ -6,13 +6,20 @@ import cn.itcast.core.dao.order.OrderDao;
 import cn.itcast.core.dao.order.OrderItemDao;
 import cn.itcast.core.pojo.item.Item;
 import cn.itcast.core.pojo.log.PayLog;
+import cn.itcast.core.pojo.log.PayLogQuery;
 import cn.itcast.core.pojo.order.Order;
 import cn.itcast.core.pojo.order.OrderItem;
+import cn.itcast.core.pojo.order.OrderItemQuery;
 import cn.itcast.core.pojo.order.OrderQuery;
 import cn.ithcast.core.service.CartService;
 import cn.ithcast.core.service.OrderService;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import entity.Cart;
+import cn.itcast.core.pojogroup.Orderpp;
+import entity.PageResult;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
@@ -22,6 +29,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@SuppressWarnings("all")
 public class OrderServiceImpl implements OrderService {
 
     // 注入OrderDao对象
@@ -152,13 +160,95 @@ public class OrderServiceImpl implements OrderService {
         redisTemplate.boundHashOps("CART").delete(order.getUserId());
     }
 
-    //查询所有订单
+    //查询我的订单
     @Override
-    public List<Order> findAllOrders(String name) {
-        OrderQuery orderQuery = new OrderQuery();
-        orderQuery.createCriteria().andSellerIdEqualTo(name);
+    public List<Orderpp> findAllOrders(String name) {
+        List<Orderpp> orderppList = new ArrayList<>();
 
-        return orderDao.selectByExample(orderQuery);
+        //根据用户名查询订单
+        PayLogQuery query = new PayLogQuery();
+        query.createCriteria().andUserIdEqualTo(name);
+        //获取该用户多个订单
+        List<PayLog> logList = payLogDao.selectByExample(query);
+
+        for (PayLog payLog : logList) {
+            String orderList = payLog.getOrderList();
+            String[] orderList_Order_Id = orderList.split(",");
+            //根据订单号查询order表
+            for (String s : orderList_Order_Id) {
+                Orderpp orderpp = new Orderpp();
+                Order order = new Order();
+
+                order = orderDao.selectByPrimaryKey(Long.parseLong(s.trim()));
+                orderpp.setOrder(order);
+                //根据order表order-id查询商品结果集
+                OrderItemQuery orderItemQuery = new OrderItemQuery();
+                orderItemQuery.createCriteria().andOrderIdEqualTo(order.getOrderId());
+                List<OrderItem> orderItemList1 = orderItemDao.selectByExample(orderItemQuery);
+                List<OrderItem> orderItemList = new ArrayList<>();
+
+                for (OrderItem item : orderItemList1) {
+                    orderItemList.add(item);
+                }
+
+                orderpp.setOrderitemList(orderItemList);
+                orderppList.add(orderpp);
+            }
+        }
+        return orderppList;
+    }
+
+    //商家后台查询订单
+    @Override
+    public PageResult findAllOrder(String name , Integer num , Integer size , Integer a) {
+        PageHelper.startPage(num, size);
+
+        OrderQuery orderQuery = new OrderQuery();
+        OrderQuery.Criteria criteria = orderQuery.createCriteria();
+        criteria.andSellerIdEqualTo(name);
+        criteria.andPaymentTimeIsNotNull();
+        List<Order> orderList = orderDao.selectByExample(orderQuery);
+
+        if (a == 0 ){
+            Page<Order> page = (Page<Order>) orderList;
+            return new PageResult(page.getTotal(), page.getResult());
+        }
+
+        Page<Order> orders = new Page<>();
+        if (a == 1) {
+            for (Order order : orderList) {
+                Date paymentTime = order.getPaymentTime();
+                long orderTime = paymentTime.getTime();
+                long newTime = System.currentTimeMillis();
+
+                if (orderTime > (newTime - 7 * 24 * 3600 * 1000)) {
+                    orders.add(order);
+                }
+            }
+            return new PageResult(orders.getTotal(), orders.getResult());
+
+        }else if (a == 2){
+            for (Order order : orderList) {
+                Date paymentTime = order.getPaymentTime();
+                long orderTime = paymentTime.getTime();
+                long newTime = System.currentTimeMillis();
+                if ((newTime - 30 * 24 *3600 * 1000) > orderTime &&  orderTime < (newTime - 7 * 24 * 3600 * 1000)) {
+                    orders.add(order);
+                }
+            }
+            return new PageResult(orders.getTotal(), orders.getResult());
+
+        }
+            for (Order order : orderList) {
+                Date paymentTime = order.getPaymentTime();
+                long orderTime = paymentTime.getTime();
+                long newTime = System.currentTimeMillis();
+                if ((newTime - 365 * 24 * 3600 * 1000) > orderTime &&  orderTime < (newTime - 30 * 24 *3600 * 1000)) {
+                    orders.add(order);
+                }
+            }
+
+        return new PageResult(orders.getTotal(), orders.getResult());
     }
 
     //订单发货
@@ -166,9 +256,52 @@ public class OrderServiceImpl implements OrderService {
     public void ordersShipment(String[] ids) {
         Order order = new Order();
         order.setStatus("2");
+
         for (String id : ids) {
             order.setOrderId(Long.valueOf(id));
             orderDao.updateByPrimaryKeySelective(order);
         }
+
     }
+
+    /*//订单统计
+    @Override
+    public List<Order> ordersStatistics(Integer a) {
+        OrderQuery orderQuery = new OrderQuery();
+        orderQuery.createCriteria().andPaymentTimeIsNotNull();
+        List<Order> orderList = orderDao.selectByExample(orderQuery);
+        ArrayList<Order> orders = new ArrayList<>();
+        if (a == 1) {
+            for (Order order : orderList) {
+                Date paymentTime = order.getPaymentTime();
+                long orderTime = paymentTime.getTime();
+                long newTime = System.currentTimeMillis();
+                if (newTime - orderTime < 7 * 24 * 3600 * 1000) {
+                    orders.add(order);
+                }
+            }
+        }else if (a == 2){
+            for (Order order : orderList) {
+                Date paymentTime = order.getPaymentTime();
+                long orderTime = paymentTime.getTime();
+                long newTime = System.currentTimeMillis();
+                if (30 * 24 *3600 * 1000 > newTime - orderTime &&  newTime - orderTime > 7 * 24 * 3600 * 1000) {
+                    orders.add(order);
+                }
+            }
+        }else {
+            for (Order order : orderList) {
+                Date paymentTime = order.getPaymentTime();
+                long orderTime = paymentTime.getTime();
+                long newTime = System.currentTimeMillis();
+                if ( 365 * 24 * 3600 * 1000> newTime - orderTime &&  newTime - orderTime > 30 * 24 *3600 * 1000) {
+                    orders.add(order);
+                }
+            }
+        }
+
+
+        return orders;
+    }*/
+
 }

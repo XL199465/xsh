@@ -1,17 +1,18 @@
 package cn.itcast.core.service;
 
+import cn.itcast.core.common.utils.ExcelUtil;
 import cn.itcast.core.dao.good.BrandDao;
 import cn.itcast.core.pojo.good.Brand;
 import cn.itcast.core.pojo.good.BrandQuery;
 import cn.ithcast.core.service.BrandService;
 import com.alibaba.dubbo.config.annotation.Service;
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import entity.PageResult;
-import entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -127,10 +128,78 @@ public class BrandServiceImpl implements BrandService {
 
     /**
      * 查询id和name,存入一个map集合 并将多个这样的集合存入list集合中
+     *
      * @return
      */
     @Override
     public List<Map> selectOptionList() {
         return brandDao.selectOptionList();
     }
+
+
+    /**
+     * 品牌Excel表导入数据库
+     */
+    @Override
+    public String ajaxUploadExcel(byte[] bytes) {
+
+        System.out.println("得到数据文件");
+        if (null == bytes) {
+            try {
+                throw new Exception("文件不存在！");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        System.out.println("加载流");
+        InputStream in = null;
+        try {
+            in = new ByteArrayInputStream(bytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        List<List<Object>> list = null;
+        try {
+            System.out.println("加载流");
+            list = new ExcelUtil().getBankListByExcel(in, "jjj");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // 调用service相应方法进行数据保存到数据库中
+        Brand vo = new Brand();
+        for (int i = 0; i < list.size(); i++) {
+            List<Object> lo = list.get(i);
+            System.out.println("遍历" + list.get(i));
+            Brand j = null;
+
+            try {
+                //j = studentmapper.selectByPrimaryKey(Long.valueOf());
+                j = brandDao.selectByPrimaryKey(Long.valueOf(String.valueOf(lo.get(0))));
+            } catch (NumberFormatException e) {
+                // TODO Auto-generated catch block
+                System.out.println("没有新增");
+            }
+            vo.setId(Long.valueOf(String.valueOf(lo.get(0))));
+            vo.setName(String.valueOf(lo.get(1)));
+            vo.setFirstChar(String.valueOf(lo.get(2)));
+            vo.setAuditstatus(String.valueOf(lo.get(3)));
+
+            if (j == null) {
+                brandDao.insertSelective(vo);
+            } else {
+                brandDao.updateByPrimaryKey(vo);
+            }
+        }
+        return "success";
+    }
+
+    @Override
+    public String test(int a) {
+        System.out.println(a);
+        System.out.println("成功");
+        return "成功";
+    }
+
 }

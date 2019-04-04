@@ -3,6 +3,7 @@ package cn.ithcast.core.service;
 import cn.itcast.core.pojo.specification.Specification;
 import cn.itcast.core.pojogroup.SpecificationVo;
 import entity.PageResult;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -50,4 +51,11 @@ public interface SpecificationService {
      * 查询规格id和规格的名字,并存入map集合中
      */
     List<Map> selectOptionList();
+
+    /**
+     * Excel表格数据导入数据库
+     * @param bytes
+     * @return
+     */
+    String ajaxUploadExcel(byte[] bytes);
 }
