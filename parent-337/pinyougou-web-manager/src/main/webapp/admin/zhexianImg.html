@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ECharts入门</title>
+    <script src='../js/echarts.min.js'></script>
+    <script src="../js/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+<!--&lt;!&ndash; 为ECharts准备一个具备大小（宽高）的DOM容器&ndash;&gt;
+<div id='main' style='width:600px;height:400px;'></div>
+&lt;!&ndash;引入echarts.js&ndash;&gt;
+
+<script>
+    //基于准备好的DOM，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    //指定图表的配置项和数据
+    var option = {
+        title: {
+            text: 'EChars入门'
+        },
+        //提示框组件
+        tooltip: {
+            //坐标轴触发，主要用于柱状图，折线图等
+            trigger: 'axis'
+        },
+        //图例
+        legend: {
+            data: ['销量']
+        },
+        //横轴
+        xAxis: {
+            data: []
+        },
+        //纵轴
+        yAxis: {},
+        //系列列表。每个系列通过type决定自己的图表类型
+        series: [{
+            name: '销量',
+            //折线图
+            type: 'line',
+            data: []
+        }]
+    };
+
+    $(function () {
+        $.ajax({
+            url:'/typeTemplate/test.do',
+            type:'POST',
+            success:function(result){
+                // //x
+                // option.xAxis.data = result.x;
+                // //y
+                // option.series.data = result.y;
+                // // 基于准备好的dom，初始化echarts实例
+                // var myChart = echarts.init(document.getElementById('main'));
+                // // 使用刚指定的配置项和数据显示图表
+                // myChart.setOption(option);
+                // alert(result);
+
+                option.xAxis.data.push(result[0].id);
+
+            }
+        });
+    })
+    //使用刚指定的配置项和数据显示图表
+    myChart.setOption(option);
+
+
+</script>-->
+
+<script>
+    //将集合中的数据保留两位小数
+    function dataToFixed(data) {
+        var seriesData = [];
+        for (var i = 0; i < data.seriesSaleList.length; i++) {
+            //将销量保留两位小数
+            var temp = data.seriesSaleList[i].toFixed(2);
+            seriesData.push(temp);
+        }
+        return seriesData;
+    }
+
+    //生成图标的方法
+    function generateChart(data) {
+        //基于准备好的DOM，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        //指定图表的配置项和数据
+        myChart.clear();
+        var option = {
+            title: {
+                text: '销售额曲线图'
+            },
+            //提示框组件
+            tooltip: {
+                //坐标轴触发，主要用于柱状图，折线图等
+                trigger: 'axis'
+            },
+            //数据全部显示
+            axisLabel: {
+                interval: 0
+            },
+            //图例
+            legend: {
+                data: ['销售额']
+            },
+            //横轴
+            xAxis: {
+                data: data.xAxisList
+            },
+            //纵轴
+            yAxis: {},
+            //系列列表。每个系列通过type决定自己的图表类型
+            series: [
+                {
+                    name: '销售额',
+                    //折线图
+                    type: 'line',
+                    data: dataToFixed(data)//处理小数点数据
+                }
+            ]
+        };
+        //使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+    }
+
+    //buttion调用的方法
+    function getData() {
+        //异步请求
+        $.post(
+            "../seller/test.do",//访问地址
+            function (data) {
+                generateChart(data);
+            },
+            "json"
+        );
+    }
+</script>
+
+
+<div align="center">
+    <button onclick="getData()">查询</button>
+</div>
+<hr>
+<!-- 为ECharts准备一个具备大小（宽高）的DOM容器-->
+<div id='main' style='width: 90%;height:400px;' align="center"></div>
+</body>
+</html>

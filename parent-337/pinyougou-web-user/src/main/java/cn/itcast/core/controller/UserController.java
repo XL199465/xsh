@@ -1,6 +1,7 @@
 package cn.itcast.core.controller;
 
 import cn.itcast.core.common.utils.PhoneFormatCheckUtils;
+import cn.itcast.core.pojo.address.Address;
 import cn.itcast.core.pojo.item.Item;
 import cn.itcast.core.pojo.user.User;
 import cn.ithcast.core.service.ItemsearchService;
@@ -30,8 +31,7 @@ public class UserController {
     @Reference
     private ItemsearchService itemsearchService;
     //注入OrderService对象
-    @Reference
-    private OrderService orderService;
+
 
     /**
      * 获取验证码
@@ -100,8 +100,14 @@ public class UserController {
     @RequestMapping("/findAllOrders")
     public List<Orderpp>findAllOrders(){
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
-        return orderService.findAllOrders(name);
+        return userService.findAllOrders(name);
     }
 
 
+    //收货地址
+    @RequestMapping("/findAllAddress")
+    public List<Address>findAllAddress(){
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userService.findAllAddress(name);
+    }
 }

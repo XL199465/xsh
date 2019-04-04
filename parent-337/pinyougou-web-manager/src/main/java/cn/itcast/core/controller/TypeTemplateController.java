@@ -3,12 +3,15 @@ package cn.itcast.core.controller;
 import cn.itcast.core.pojo.template.TypeTemplate;
 import cn.ithcast.core.service.TypeTemplateService;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.fastjson.JSON;
 import entity.PageResult;
 import entity.Result;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -97,4 +100,7 @@ public class TypeTemplateController {
     public List<Map> findTypeTemplateList() {
         return typeTemplateService.findTypeTemplateList();
     }
+
+
+
 }

@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 // 由于要响应json格式的数据,又要注册组件到容器,所以使用注解@RestController
 @RestController

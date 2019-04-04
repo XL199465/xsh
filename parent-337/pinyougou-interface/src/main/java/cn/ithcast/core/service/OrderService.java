@@ -14,8 +14,7 @@ public interface OrderService {
      */
     void add(Order order);
 
-    //查询我的订单
-    List<Orderpp> findAllOrders(String name);
+
 
     //商家后台 查询订单
    PageResult findAllOrder(String name , Integer num , Integer size , Integer a);

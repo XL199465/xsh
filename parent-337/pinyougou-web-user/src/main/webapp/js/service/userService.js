@@ -34,9 +34,6 @@ app.service('userService',function($http){
 		return $http.get('../user/sendCode.do?phone='+phone);
 	}
 
-	//查询所有订单
-    this.findAllOrders=function(){
-        return $http.get('../user/findAllOrders.do');
-    }
+
 	
 });

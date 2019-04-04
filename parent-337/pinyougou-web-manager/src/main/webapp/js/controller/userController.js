@@ -1,4 +1,4 @@
-app.controller('userController', function ($scope, $controller, userService) {
+app.controller('userController', function ($scope, $controller, userService, excelService) {
 
     // 继承
     $controller('baseController', {$scope: $scope});
@@ -40,6 +40,15 @@ app.controller('userController', function ($scope, $controller, userService) {
                 $scope.entity.userTotalCount = response.userTotalCount;
                 $scope.entity.activityUserCount = response.activityUserCount;
                 $scope.entity.unactivityUserCount = response.unactivityUserCount;
+            }
+        )
+    };
+
+    // excel导出
+    $scope.exportExcel = function (id) {
+        excelService.exportExcel(id).success(
+            function (response) {
+                alert(response);
             }
         )
     }

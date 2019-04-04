@@ -10,9 +10,14 @@
 
     <link rel="stylesheet" type="text/css" href="css/webbase.css" />
     <link rel="stylesheet" type="text/css" href="css/pages-seckillOrder.css" />
+
+	<script type="text/javascript" src="plugins/angularjs/angular.min.js"></script>
+	<script type="text/javascript" src="js/base.js"></script>
+	<script type="text/javascript" src="js/service/loginService.js"></script>
+	<script type="text/javascript" src="js/controller/indexController.js"></script>
 </head>
 
-<body>
+<body ng-app="pinyougou" ng-controller="indexController" ng-init="findAllAddress()">
     <!-- 头部栏位 -->
     <!--页面顶部-->
 <div id="nav-bottom">
@@ -194,7 +199,7 @@ $(function(){
                             <a data-toggle="modal" data-target=".edit" data-keyboard="false"   class="sui-btn  btn-info add-new">添加新地址</a>
                             <span class="clearfix"></span>
                         </div>
-                        <div class="address-detail" ng-repeat="address in addressList">
+                        <div class="address-detail">
                             <table class="sui-table table-bordered">
                                 <thead>
                                     <tr>
@@ -205,8 +210,8 @@ $(function(){
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>刘田田</td>
+                                    <tr  ng-repeat="address in addressList">
+                                        <td>{{address.contact}}</td>
                                         <td>{{address.address}}</td>
                                         <td>{{address.mobile}}</td>
                                         <td>
@@ -216,7 +221,7 @@ $(function(){
                                         </td>
                                     </tr>
 
-                                    
+
                                 </tbody>
                             </table>                          
                         </div>
