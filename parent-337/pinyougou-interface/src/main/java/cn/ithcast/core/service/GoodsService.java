@@ -1,8 +1,8 @@
 package cn.ithcast.core.service;
 
-import cn.itcast.core.pojo.good.Goods;
-import cn.itcast.core.pojo.seckill.SeckillGoods;
-import cn.itcast.core.pojogroup.GoodsVo;
+import cn.ithcast.core.pojo.good.Goods;
+import cn.ithcast.core.pojo.seckill.SeckillGoods;
+import cn.ithcast.core.pojogroup.GoodsVo;
 import entity.PageResult;
 import entity.Result;
 

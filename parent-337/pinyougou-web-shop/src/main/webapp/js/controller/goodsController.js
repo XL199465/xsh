@@ -273,14 +273,41 @@ app.controller('goodsController', function ($scope, $controller, $location, good
 
 
     //查询订单
-    $scope.findAllOrder=function () {
-        goodsService.findAllOrder().success(
+    $scope.searchEntity.auditStatus = 0;
+    $scope.search=function (num , size) {
+        goodsService.searchs(num , size , $scope.searchEntity.auditStatus).success(
             function (response) {
-                $scope.Orderlist = response;
+
+                $scope.Orderlist = response.rows;
+                $scope.OrderlistTotal = response.total;
             }
         )
     }
 
+    //订单发货
+    $scope.ordersShipment=function () {
+        goodsService.ordersShipment($scope.selectIds).success(
+            function (response) {
+                if (response.flag){
+                    alert(response.message);
+                }else {
+                    alert(response.message);
+                }
+
+            }
+        )
+    }
+
+    /*//订单统计
+    $scope.ordersStatistics=function () {
+        //alert($scope.searchEntity.auditStatus)
+        goodsService.ordersStatistics($scope.searchEntity.auditStatus).success(
+            function (response) {
+
+                $scope.orderStatisList=response;
+            }
+        )
+    }*/
 
 
 

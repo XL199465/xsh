@@ -30,7 +30,7 @@
     <!--配置dubbo的连接服务-->
     <dubbo:application name="pinyougou-web-manager"/>
     <dubbo:registry address="zookeeper://192.168.200.128:2181"/>
-    <dubbo:annotation package="cn.itcast.core.controller"/>
+    <dubbo:annotation package="cn.ithcast.core.controller"/>
 
     <!--配置超时连接时间-->
     <dubbo:consumer timeout="600" check="false"/>

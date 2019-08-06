@@ -1,6 +1,6 @@
 package cn.ithcast.core.service;
 
-import cn.itcast.core.pojo.item.Item;
+import cn.ithcast.core.pojo.item.Item;
 import entity.Cart;
 import entity.Collect;
 

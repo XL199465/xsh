@@ -39,13 +39,19 @@ app.controller('userController', function ($scope, $controller, userService) {
         userService.findAll().success(
             function (response) {
                 $scope.list = response;
-                $scope.list.orderItemList = response[0].orderItemList;
-                $scope.sellerName= response[0].sellerName;
             }
         )
     };
 
 
+    // 查询所有订单
+    $scope.findAllOrders = function () {
+        userService.findAllOrders().success(
+            function (response) {
+                $scope.list = response;
+            }
+        )
+    };
 
 
     // // 分页查询品牌

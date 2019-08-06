@@ -78,6 +78,8 @@ app.controller('brandController', function ($scope, $controller, brandService) {
     $scope.search = function (pageNum, pageSize) {
         brandService.search(pageNum, pageSize, $scope.searchEntity).success(
             function (response) {
+                alert(1);
+                console.log(response);
                 // 改变数据
                 $scope.list = response.rows;
                 // 改变总条数

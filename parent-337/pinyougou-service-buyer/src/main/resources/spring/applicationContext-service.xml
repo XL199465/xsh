@@ -12,10 +12,10 @@
 
     <dubbo:application name="buyer-service"/>
     <dubbo:registry address="zookeeper://192.168.200.128:2181"/>
-    <dubbo:annotation package="cn.itcast.core.service"/>
+    <dubbo:annotation package="cn.ithcast.core.service"/>
 
     <!--实例化IDWorker对象-->
-    <bean id="idWorker" class="cn.itcast.core.common.utils.IdWorker">
+    <bean id="idWorker" class="cn.ithcast.core.common.utils.IdWorker">
         <!-- 进程ID -->
         <constructor-arg index="0" value="0"/>
         <!-- 数据中心ID -->

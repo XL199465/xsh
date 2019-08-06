@@ -77,7 +77,7 @@
     ></dubbo:reference>
 
     <!--bean:是实例化对象-->
-    <beans:bean id="userDetailService" class="cn.itcast.core.service.UserDetailsServiceImpl">
+    <beans:bean id="userDetailService" class="cn.ithcast.core.service.UserDetailsServiceImpl">
         <!--property:是通过set方法,依赖注入SellerService对象-->
         <beans:property name="sellerService" ref="sellerService"></beans:property>
     </beans:bean>

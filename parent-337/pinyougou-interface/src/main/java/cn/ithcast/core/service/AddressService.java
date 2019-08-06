@@ -1,6 +1,6 @@
 package cn.ithcast.core.service;
 
-import cn.itcast.core.pojo.address.Address;
+import cn.ithcast.core.pojo.address.Address;
 
 import java.util.List;
 

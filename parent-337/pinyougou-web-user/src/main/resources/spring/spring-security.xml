@@ -78,7 +78,7 @@
     </beans:bean>
 
     <!-- 认证类 该类中给用户进行授权 -->
-    <beans:bean id="userDetailsService" class="cn.itcast.core.service.UserDetailServiceImpl">
+    <beans:bean id="userDetailsService" class="cn.ithcast.core.service.UserDetailServiceImpl">
         <beans:property name="userService" ref="userService"/>
     </beans:bean>
     <!--引用dubbo 服务-->

@@ -1,6 +1,6 @@
 package cn.ithcast.core.service;
 
-import cn.itcast.core.pojo.ad.ContentCategory;
+import cn.ithcast.core.pojo.ad.ContentCategory;
 import entity.PageResult;
 
 import java.util.List;

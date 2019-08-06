@@ -1,7 +1,9 @@
 package cn.ithcast.core.service;
 
-import cn.itcast.core.pojo.seller.Seller;
+import cn.ithcast.core.pojo.seller.Seller;
 import entity.PageResult;
+
+import java.util.List;
 
 public interface SellerService {
 
@@ -33,4 +35,10 @@ public interface SellerService {
      * @param status
      */
     void updateStatus(String sellerId, String status);
+
+    /**
+     * 查询所有商家
+     * @return
+     */
+    List<Seller> findAll();
 }

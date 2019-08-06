@@ -1,6 +1,6 @@
 package cn.ithcast.core.service;
 
-import cn.itcast.core.pojo.item.ItemCat;
+import cn.ithcast.core.pojo.item.ItemCat;
 import entity.Result;
 
 import java.util.List;

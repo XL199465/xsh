@@ -1,9 +1,7 @@
 package cn.ithcast.core.service;
 
-import cn.itcast.core.pojo.template.TypeTemplate;
+import cn.ithcast.core.pojo.template.TypeTemplate;
 import entity.PageResult;
-import entity.Result;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.Map;

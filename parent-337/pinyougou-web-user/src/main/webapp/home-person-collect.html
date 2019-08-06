@@ -204,11 +204,11 @@ $(function(){
                             <div class="goods-list">
                                 <ul class="yui3-g"  id="goods-list">
                                     <li class="yui3-u-1-4">
-                                        <div class="list-wrap" ng-repeat="entity in list.orderItemList">
-                                            <div class="p-img"><img src="{{entity.picPath}}" alt=''></div>
+                                        <div class="list-wrap" ng-repeat="entity in list">
+                                            <div class="p-img"><img src="{{entity.image}}" alt=''></div>
                                             <div class="price"><strong><em>¥</em> <i>{{entity.price}}</i></strong></div>
                                             <div class="attr"><em>{{entity.title}}</em></div>
-                                            <div class="cu"><em><span>{{sellerName}}</span></em></div>
+                                            <div class="cu"><em><span>{{entity.seller}}</span></em></div>
                                             <div class="operate">
                                                 <a href="success-cart.html" target="_blank" class="sui-btn btn-bordered btn-danger">加入购物车</a>
                                                 <a href="javascript:void(0);" class="sui-btn btn-bordered">对比</a>

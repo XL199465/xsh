@@ -1,11 +1,8 @@
 package cn.ithcast.core.service;
 
-import cn.itcast.core.pojo.good.Brand;
+import cn.ithcast.core.pojo.good.Brand;
 import entity.PageResult;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
